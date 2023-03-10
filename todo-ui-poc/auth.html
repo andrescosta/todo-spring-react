@@ -1,0 +1,23 @@
+<html>
+
+<head>
+    <script src="http://localhost:8282/js/keycloak.js"></script>
+    <script>
+        function initKeycloak() {
+            const keycloak = new Keycloak();
+            keycloak.init({
+                onLoad: "login-required",
+            }).then(function (authenticated) {
+                alert(authenticated ? 'authenticated' : 'not authenticated');
+            }).catch(function (e) {
+                alert('failed to initialize:' + e);
+            });
+        }
+    </script>
+</head>
+
+<body onload="initKeycloak()">
+    <!-- your page content goes here -->
+</body>
+
+</html>

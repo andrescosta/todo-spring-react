@@ -1,0 +1,189 @@
+POST http://localhost:8080/musers HTTP/1.1
+content-type: application/json
+
+{
+    "name":"name1",
+    "email":"email1"
+}
+
+###
+GET http://localhost:8080/activities HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJHQnNrYmFFZ3FSQzR3M3I3cVB5R05YXzVEcUJJbjUzU3pacGJtRzBYcy1BIn0.eyJleHAiOjE2NzgzOTEyNDcsImlhdCI6MTY3ODM5MDk0NywiYXV0aF90aW1lIjoxNjc4MzkwOTM2LCJqdGkiOiI5NWRkYTdlZS01NWNmLTRjMDUtYmFlZi0xMjA1ODg0MjIxY2YiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgyODIvcmVhbG1zL215LXRvZG8tYXBwIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjMyYjVlYTc3LWMwYmMtNDVmNC1iNmQxLWEzNGRkZTI5MWViYSIsInR5cCI6IkJlYXJlciIsImF6cCI6Im15LXRvZG8tYXBwLXdlYi1jbGllbnQiLCJub25jZSI6IjFhYWVkMWJlLTgyZGQtNDgxOS05Yzc3LWYxZTE3ZGY5MmJjOSIsInNlc3Npb25fc3RhdGUiOiIwOWYyYWU4My1iOGQ2LTQyNmMtOWRhZi0yY2ZlYWU3MjU0ZDMiLCJhY3IiOiIwIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiLCJodHRwOi8vbG9jYWxob3N0OjMwMDAiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtbXktdG9kby1hcHAiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCIsInNpZCI6IjA5ZjJhZTgzLWI4ZDYtNDI2Yy05ZGFmLTJjZmVhZTcyNTRkMyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdCIsImdpdmVuX25hbWUiOiIiLCJmYW1pbHlfbmFtZSI6IiJ9.a9IkIfpoXSOPTA6rZRhpzL5eVQo9HRPf429d5TgTgdD1_VTFVt-1mC516iqbKSF8pMMPP-UwT9DZnp316k2Jg0w0XoxLv1qOE-JUEXgSXQa5I9grVf9mUK64wbXIpC4AlBR5v6YZ42EFHYm3kErtgixEmYukhDSL6cgfxvqIVSTKJGQf4qyM6PmpIoDYZiNWSTCjvT0rNQMNN3PL5ueTPrW-dl68yvhEaSWujHnpeIvdsMf_Oi_dCntmXR-clbCUtWCrn_gNJFSOhKbM9TK6di2p-698Vqd6SJotYYHZdnRqEc3cLYoDnr-SrozsCqGW3e2bASRgvwPqur_1bPsUVQ
+
+###
+
+OPTIONS http://localhost:8080/activities/ HTTP/1.1
+
+
+###
+POST http://localhost:8080/activities HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJHQnNrYmFFZ3FSQzR3M3I3cVB5R05YXzVEcUJJbjUzU3pacGJtRzBYcy1BIn0.eyJleHAiOjE2NzgzOTEyNDcsImlhdCI6MTY3ODM5MDk0NywiYXV0aF90aW1lIjoxNjc4MzkwOTM2LCJqdGkiOiI5NWRkYTdlZS01NWNmLTRjMDUtYmFlZi0xMjA1ODg0MjIxY2YiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgyODIvcmVhbG1zL215LXRvZG8tYXBwIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjMyYjVlYTc3LWMwYmMtNDVmNC1iNmQxLWEzNGRkZTI5MWViYSIsInR5cCI6IkJlYXJlciIsImF6cCI6Im15LXRvZG8tYXBwLXdlYi1jbGllbnQiLCJub25jZSI6IjFhYWVkMWJlLTgyZGQtNDgxOS05Yzc3LWYxZTE3ZGY5MmJjOSIsInNlc3Npb25fc3RhdGUiOiIwOWYyYWU4My1iOGQ2LTQyNmMtOWRhZi0yY2ZlYWU3MjU0ZDMiLCJhY3IiOiIwIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiLCJodHRwOi8vbG9jYWxob3N0OjMwMDAiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtbXktdG9kby1hcHAiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCIsInNpZCI6IjA5ZjJhZTgzLWI4ZDYtNDI2Yy05ZGFmLTJjZmVhZTcyNTRkMyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdCIsImdpdmVuX25hbWUiOiIiLCJmYW1pbHlfbmFtZSI6IiJ9.a9IkIfpoXSOPTA6rZRhpzL5eVQo9HRPf429d5TgTgdD1_VTFVt-1mC516iqbKSF8pMMPP-UwT9DZnp316k2Jg0w0XoxLv1qOE-JUEXgSXQa5I9grVf9mUK64wbXIpC4AlBR5v6YZ42EFHYm3kErtgixEmYukhDSL6cgfxvqIVSTKJGQf4qyM6PmpIoDYZiNWSTCjvT0rNQMNN3PL5ueTPrW-dl68yvhEaSWujHnpeIvdsMf_Oi_dCntmXR-clbCUtWCrn_gNJFSOhKbM9TK6di2p-698Vqd6SJotYYHZdnRqEc3cLYoDnr-SrozsCqGW3e2bASRgvwPqur_1bPsUVQ
+
+{
+    "name":"Link-2",
+    "description":"This is a link",
+    "type":"LINK",
+    "state":0,
+    "status":0,
+    "tags":["t1","t2"],
+    "extraData": {
+        "uno":"1",
+        "dos":2
+    },
+    "labels":[
+        {
+            "publicId":"77fd98c3-b5d5-42f2-b4b9-85742cdb8c1b"
+        }
+    ],
+    "media":[
+        {
+            "name":"media1",
+            "description":"media1",
+            "type":"IMAGE",
+            "uri":"http://www.a.com/j.jpg",
+            "extraData": {
+                "uno":"1",
+                "dos":2
+            }
+        }
+    ]
+}
+
+###
+POST http://localhost:8080/activities HTTP/1.1
+content-type: application/json
+
+{
+    "name":"Book-3",
+    "description":"This is Book 3",
+    "type":"BOOK",
+    "state":0,
+    "status":0,
+    "tags":["t1","t2"],
+    "extraData": {
+        "uno":"1",
+        "dos":2
+    },
+    "muser": {
+        "id":4
+    },
+    "labels":[
+        {
+            "publicId":"77fd98c3-b5d5-42f2-b4b9-85742cdb8c1b"
+        }
+    ],
+    "media":[
+        {
+            "name":"media1",
+            "description":"media1",
+            "type":"IMAGE",
+            "uri":"http://www.a.com/j.jpg",
+            "extraData": {
+                "uno":"1",
+                "dos":2
+            }
+        }
+    ]
+}
+
+###
+POST http://localhost:8080/activities HTTP/1.1
+content-type: application/json
+
+{
+    "name":"Movie-4",
+    "description":"This is a Movie 4",
+    "type":2,
+    "state":0,
+    "status":0,
+    "tags":["t1","t2"],
+    "extraData": {
+        "uno":"1",
+        "dos":2
+    },
+    "muser": {
+        "id":4
+    },
+    "labels":[
+        {
+            "publicId":"77fd98c3-b5d5-42f2-b4b9-85742cdb8c1b"
+        }
+    ],
+    "media":[
+        {
+            "name":"media1",
+            "description":"media1",
+            "type":"IMAGE",
+            "uri":"http://www.a.com/j.jpg",
+            "extraData": {
+                "uno":"1",
+                "dos":2
+            }
+        }
+    ]
+}
+
+###
+
+POST http://localhost:8080/activities HTTP/1.1
+content-type: application/json
+
+{
+    "name":"Book-S",
+    "description":"This is Book S",
+    "type":"BOOK",
+    "tags":["t1","t2"],
+    "muser": {
+        "id":4
+    },
+    "media":[
+        {
+            "name":"media1",
+            "description":"media1",
+            "type":"LINK",
+            "uri":"http://www.a.com/j.jpg"
+        }
+    ]
+}
+
+###
+POST http://localhost:8080/activities HTTP/1.1
+content-type: application/json
+
+{"name":"ff","description":"gg","tags":["a","s"],"media":[{"name":"link","description":"link","type":"LINK","uri":"hh"}],"muser":{"id":4}}
+###
+
+DELETE http://localhost:8080/activities/de6d1b25-cd9e-430e-b766-29a053b00e68 HTTP/1.1
+
+
+###
+POST http://localhost:8080/activities HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJHQnNrYmFFZ3FSQzR3M3I3cVB5R05YXzVEcUJJbjUzU3pacGJtRzBYcy1BIn0.eyJleHAiOjE2NzgzOTEyNDcsImlhdCI6MTY3ODM5MDk0NywiYXV0aF90aW1lIjoxNjc4MzkwOTM2LCJqdGkiOiI5NWRkYTdlZS01NWNmLTRjMDUtYmFlZi0xMjA1ODg0MjIxY2YiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgyODIvcmVhbG1zL215LXRvZG8tYXBwIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjMyYjVlYTc3LWMwYmMtNDVmNC1iNmQxLWEzNGRkZTI5MWViYSIsInR5cCI6IkJlYXJlciIsImF6cCI6Im15LXRvZG8tYXBwLXdlYi1jbGllbnQiLCJub25jZSI6IjFhYWVkMWJlLTgyZGQtNDgxOS05Yzc3LWYxZTE3ZGY5MmJjOSIsInNlc3Npb25fc3RhdGUiOiIwOWYyYWU4My1iOGQ2LTQyNmMtOWRhZi0yY2ZlYWU3MjU0ZDMiLCJhY3IiOiIwIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiLCJodHRwOi8vbG9jYWxob3N0OjMwMDAiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtbXktdG9kby1hcHAiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCIsInNpZCI6IjA5ZjJhZTgzLWI4ZDYtNDI2Yy05ZGFmLTJjZmVhZTcyNTRkMyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdCIsImdpdmVuX25hbWUiOiIiLCJmYW1pbHlfbmFtZSI6IiJ9.a9IkIfpoXSOPTA6rZRhpzL5eVQo9HRPf429d5TgTgdD1_VTFVt-1mC516iqbKSF8pMMPP-UwT9DZnp316k2Jg0w0XoxLv1qOE-JUEXgSXQa5I9grVf9mUK64wbXIpC4AlBR5v6YZ42EFHYm3kErtgixEmYukhDSL6cgfxvqIVSTKJGQf4qyM6PmpIoDYZiNWSTCjvT0rNQMNN3PL5ueTPrW-dl68yvhEaSWujHnpeIvdsMf_Oi_dCntmXR-clbCUtWCrn_gNJFSOhKbM9TK6di2p-698Vqd6SJotYYHZdnRqEc3cLYoDnr-SrozsCqGW3e2bASRgvwPqur_1bPsUVQ
+
+{
+    "name":"Link-2",
+    "description":"This is a link",
+    "type":"LINK",
+    "state":0,
+    "status":0,
+    "tags":["t1","t2"],
+    "extraData": {
+        "uno":"1",
+        "dos":2
+    },
+    "media":[
+        {
+            "name":"media1",
+            "description":"media1",
+            "type":"IMAGE",
+            "uri":"http://www.a.com/j.jpg",
+            "extraData": {
+                "uno":"1",
+                "dos":2
+            }
+        }
+    ]
+}

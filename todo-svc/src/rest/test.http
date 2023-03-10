@@ -1,0 +1,70 @@
+
+GET http://localhost:8080/activities/b0fd1de6-0bca-4cd0-8c8f-36d3997cbb5b HTTP/1.1
+content-type: application/json
+###
+GET http://localhost:8080/activities/users/64241a52-5881-4607-8e89-200451e707c3 HTTP/1.1
+content-type: application/json
+###
+
+POST http://localhost:8080/musers HTTP/1.1
+content-type: application/json
+
+{
+    "name":"name1",
+    "email":"email1"
+}
+###
+
+POST http://localhost:8080/activities HTTP/1.1
+content-type: application/json
+
+{
+    "name":"act2",
+    "description":"act 2 act 1",
+    "type":0,
+    "state":0,
+    "status":0,
+    "tags":["t1","t2"],
+    "extraData": {
+        "uno":"1",
+        "dos":2
+    },
+    "muser": {
+        "id":3
+    },
+    "labels":[
+        {
+            "publicId":"77fd98c3-b5d5-42f2-b4b9-85742cdb8c1b"
+        }
+    ],
+    "media":[
+        {
+            "name":"media1",
+            "description":"media1",
+            "type":"IMAGE",
+            "uri":"http://www.a.com/j.jpg",
+            "extraData": {
+                "uno":"1",
+                "dos":2
+            }
+        }
+    ]
+}
+
+###
+
+POST http://localhost:8080/labels HTTP/1.1
+content-type: application/json
+
+{
+    "name":"lbl1",
+    "description":"lbl 1 lbl 1",
+    "muser": {
+        "id":1
+    }
+}
+
+###
+GET http://localhost:8080/labels/users/672d2e23-b824-41ca-97b0-6efe2d589842 HTTP/1.1
+content-type: application/json
+

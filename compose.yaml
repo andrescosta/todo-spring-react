@@ -1,0 +1,99 @@
+version: '3.8'
+
+x-keycloakdb-variables: &keycloakdb-variables
+  KC_DB_USERNAME: keycloak
+  KC_DB_PASSWORD: keycloak123
+  KC_DB_URL_DATABASE: keycloak
+
+networks:
+  backend:
+    name: app
+    driver: bridge
+volumes:
+  postgres_data:
+    driver: local
+services:
+  todoweb:
+    image: coeux/todo-web:latest
+    build: ./todo-web
+    container_name: todo-web
+    ports:
+      - "3000:3000"
+    networks:
+      - backend
+    depends_on:
+      - db
+      - keycloak
+      - todosvc
+    healthcheck:
+      test: curl -f http://localhost:3000/ || exit 1
+      interval: 1m
+      timeout: 10s
+      retries: 2
+  todosvc:
+    image: coeux/todo:latest
+    build: ./todo-svc
+    container_name: todo-svc
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=localdocker
+    networks:
+      - backend
+    depends_on:
+      - db
+      - keycloak
+    healthcheck:
+      test: curl -f http://localhost:8080/activities || exit 1
+      interval: 1m
+      timeout: 10s
+      retries: 2
+  db:
+    image: postgres:15
+    container_name: postgres-db
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./todo-db:/docker-entrypoint-initdb.d/
+    networks:
+      - backend
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      APP_DB_USER: todo_user
+      APP_DB_PASS: mysecretpassword
+      APP_DB_NAME: todo
+      <<: *keycloakdb-variables
+      PGDATA: /var/lib/postgresql/data/pgdata
+    healthcheck:
+      test: pg_isready -U postgres
+      interval: 1m
+      timeout: 10s
+      retries: 2
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak
+    volumes:
+      - ./keycloak/data:/opt/keycloak/data/import
+    environment:
+      KC_DB: postgres
+      KC_DB_URL_HOST: postgres-db
+      KC_DB_URL_PORT: 5432
+      KC_DB_SCHEMA: public
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: keycloak123
+      KC_DB_URL_DATABASE: keycloak
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KEYCLOAK_FRONTEND_URL: http://localhost:8282/auth 
+    command: 
+      - start-dev
+      - --import-realm
+    ports:
+      - "8282:8080"
+    networks:
+      - backend
+    depends_on:
+      - db

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>W3.CSS Template</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        html,
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-family: "Raleway", sans-serif
+        }
+    </style>
+</head>
+
+<body class="w3-light-grey">
+
+    <div id="modalBook" class="w3-modal">
+        <div class="w3-modal-content">
+            <span onclick="closeAdd()" class="w3-button w3-display-topright w3-light-grey">&times;</span>
+            <form class="w3-container w3-card-4 w3-light-grey">
+                <h6><i class="fa fa-link"> </i></h6>
+
+                <p><label>Link</label>
+                    <input class="w3-input w3-border" name="link" type="text">
+                </p>
+
+                <p><label>Description</label>
+                    <input class="w3-input w3-border" name="description" type="text">
+                </p>
+                <p>
+                    <button class="w3-btn w3-dark-grey">Add</button>
+                </p>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="w3-bar w3-black w3-top w3-large" style="z-index:4">
+        <button class="w3-bar-item w3-button w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i
+                class="fa fa-bars"></i> </button>
+        <button href="#" class="w3-bar-item w3-button w3-right "><i class="fa fa-user-circle-o"></i> </button>
+    </div>
+
+    <!-- Sidebar/menu -->
+    <div class="w3-sidebar w3-bar-block w3-dark-grey w3-animate-left" style="display:none" id="mySidebar"><br />
+        <div class="w3-container">
+            <h5>Menu</h5>
+        </div>
+        <div class="w3-bar-block">
+            <a href="#" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i> 
+                All TODOs</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-hashtag fa-fw"></i>  Label 1</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-hashtag fa-fw"></i>  Label 2</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-hashtag fa-fw"></i>  Label 3</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-trash fa-fw"></i>  Deleted</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>  Archived</a>
+            <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i> 
+                Settings</a><br /><br />
+        </div>
+    </div>
+
+
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+        title="close side menu" id="myOverlay"></div>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main" style="margin-left:50px;margin-top:43px;">
+
+        <!-- Header -->
+        <header class="w3-container" style="padding-top:22px">
+            <h5><b><i class="fa fa-address-book-o"></i>MyTODOs</b></h5>
+        </header>
+        <p> </p>
+        <p> </p>
+        <!-- Menu Bar -->
+        <div class="w3-bar w3-light-grey w3-border">
+            <a href="#" class="w3-bar-item w3-button w3-dark-grey"><i class="fa fa-home"></i></a>
+            <a href="#" class="w3-bar-item w3-button"><i class="fa fa-link"></i></a>
+            <a href="#" class="w3-bar-item w3-button"><i class="fa fa-book"></i></a>
+            <a href="#" class="w3-bar-item w3-button"><i class="fa fa-file-movie-o"></i></a>
+            <a href="#" class="w3-bar-item w3-button w3-black" style="margin-left: 5px;"><i
+                    class="fa fa-search"></i></a>
+            <a href="#" onclick="openAdd()" class="w3-bar-item w3-button w3-black" style="margin-left: 5px;"><i
+                    class="fa fa-plus"></i></a>
+        </div>
+        <div>
+        </div>
+        <!-- Panel  -->
+        <div class="w3-panel">
+            <div class="w3-row-padding" style="width:100%">
+                <div class="w3-col s3">
+                    <div class="w3-hover-shadow w3-display-container w3-white">
+                        <header class="w3-container">
+                            <h5><i class="fa fa-link"></i></h5>
+                        </header>
+                        <div class="w3-container">
+                            <p>This is the name</p>
+                            <hr />
+                            <p>Description</p><br />
+                        </div>
+                        <div class="w3-display-container w3-row w3-hover-opacity-off" style="height:35px;width:200px;">
+                            <a href="#" class="w3-col w3-button w3-display-hover" style="width: 20%;"><i
+                                    class="fa fa-edit"></i></a>
+                            <a href="#" class="w3-col w3-button w3-display-hover" style="width: 20%;"><i
+                                    class="fa fa-trash"></i></a>
+                            <a href="#" class="w3-col w3-button w3-display-hover" style="width: 20%;"><i
+                                    class="fa fa-tags"></i></a>
+                            <a href="#" class="w3-col w3-button w3-display-hover" style="width: 20%;"><i
+                                    class="fa fa-star-o"></i></a>
+                            <a href="#" class="w3-col w3-button w3-display-hover" style="width: 20%;"><i
+                                    class="fa fa-archive"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w3-col s3">
+                    <div class="w3-hover-shadow w3-display-container w3-white">
+                        <header class="w3-container">
+                            <h5><i class="fa fa-link"></i></h5>
+                        </header>
+                        <div class="w3-container">
+                            <p>This is the name1</p>
+                            <hr />
+                            <p>Description</p><br />
+                        </div>
+                        <div class="w3-display-container w3-row w3-hover-opacity-off" style="height:35px;width:200px;">
+                            <a href="#" class="w3-col w3-button w3-display-hover" style="width: 20%;"><i
+                                    class="fa fa-edit"></i></a>
+                            <a href="#" class="w3-col w3-button w3-display-hover" style="width: 20%;"><i
+                                    class="fa fa-trash"></i></a>
+                            <a href="#" class="w3-col w3-button w3-display-hover" style="width: 20%;"><i
+                                    class="fa fa-tags"></i></a>
+                            <a href="#" class="w3-col w3-button w3-display-hover" style="width: 20%;"><i
+                                    class="fa fa-star-o"></i></a>
+                            <a href="#" class="w3-col w3-button w3-display-hover" style="width: 20%;"><i
+                                    class="fa fa-archive"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w3-col s3">
+                    <div class="w3-hover-shadow w3-display-container w3-white">
+                        <header class="w3-container">
+                            <h5><i class="fa fa-book"></i></h5>
+                        </header>
+                        <div class="w3-container">
+                            <p>This is the book's name</p>
+                            <hr />
+                            <p>Description</p><br />
+                        </div>
+                        <div class="w3-display-container w3-row w3-hover-opacity-off" style="height:35px;width:200px;">
+                            <a href="#" class="w3-col w3-button w3-display-hover" style="width: 20%;"><i
+                                    class="fa fa-edit"></i></a>
+                            <a href="#" class="w3-col w3-button w3-display-hover" style="width: 20%;"><i
+                                    class="fa fa-trash"></i></a>
+                            <a href="#" class="w3-col w3-button w3-display-hover" style="width: 20%;"><i
+                                    class="fa fa-tags"></i></a>
+                            <a href="#" class="w3-col w3-button w3-display-hover" style="width: 20%;"><i
+                                    class="fa fa-star-o"></i></a>
+                            <a href="#" class="w3-col w3-button w3-display-hover" style="width: 20%;"><i
+                                    class="fa fa-archive"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w3-col s3">
+                    <div class="w3-hover-shadow w3-white w3-display-container">
+                        <header class="w3-container">
+                            <h5><i class="fa fa-file-movie-o"></i></h5>
+                        </header>
+                        <div class="w3-container">
+                            <p>This is the book's name</p>
+                            <hr />
+                            <p>Description</p><br />
+                        </div>
+                        <div class="w3-display-container w3-row w3-hover-opacity-off" style="height:35px;width:200px;">
+                            <a href="#" class="w3-col w3-button w3-display-hover" style="width: 20%;"><i
+                                    class="fa fa-edit"></i></a>
+                            <a href="#" class="w3-col w3-button w3-display-hover" style="width: 20%;"><i
+                                    class="fa fa-trash"></i></a>
+                            <a href="#" class="w3-col w3-button w3-display-hover" style="width: 20%;"><i
+                                    class="fa fa-tags"></i></a>
+                            <a href="#" class="w3-col w3-button w3-display-hover" style="width: 20%;"><i
+                                    class="fa fa-star-o"></i></a>
+                            <a href="#" class="w3-col w3-button w3-display-hover" style="width: 20%;"><i
+                                    class="fa fa-archive"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="w3-container w3-padding-16 w3-light-grey">
+            <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+        </footer>
+
+        <!-- End page content -->
+    </div>
+
+    <script>
+        // Get the Sidebar
+        var mySidebar = document.getElementById("mySidebar");
+
+        // Get the DIV with overlay effect
+        var overlayBg = document.getElementById("myOverlay");
+
+        // Toggle between showing and hiding the sidebar, and add overlay effect
+        function w3_open() {
+            if (mySidebar.style.display === 'block') {
+                mySidebar.style.display = 'none';
+                overlayBg.style.display = "none";
+            } else {
+                mySidebar.style.display = 'block';
+                overlayBg.style.display = "block";
+            }
+        }
+
+        // Close the sidebar with the close button
+        function w3_close() {
+            mySidebar.style.display = "none";
+            overlayBg.style.display = "none";
+        }
+        function openAdd() {
+            document.getElementById('modalBook').style.display = 'block'
+
+        }
+
+        function closeAdd() {
+            document.getElementById('modalBook').style.display = 'none'
+        }
+    </script>
+
+</body>
+
+</html>
