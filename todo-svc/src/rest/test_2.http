@@ -5,6 +5,8 @@ content-type: application/json
     "name":"name1",
     "email":"email1"
 }
+###
+GET http://localhost:8080/actuator/prometheus HTTP/1.1
 
 ###
 GET http://localhost:8080/activities HTTP/1.1

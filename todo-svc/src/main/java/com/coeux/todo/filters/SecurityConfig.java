@@ -26,6 +26,7 @@ public class SecurityConfig {
                                                 new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
                                 .authorizeHttpRequests(authorize -> authorize
                                                 .requestMatchers(HttpMethod.OPTIONS).permitAll()
+                                                .requestMatchers("/actuator/**").permitAll()
                                                 .anyRequest().authenticated())
                                 .addFilterBefore(new JwtTokenAuthenticationFilter(tokenProvider),
                                                 UsernamePasswordAuthenticationFilter.class)

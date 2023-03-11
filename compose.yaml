@@ -12,6 +12,8 @@ networks:
 volumes:
   postgres_data:
     driver: local
+  grafana_data:
+    driver: local
 services:
   todoweb:
     image: coeux/todo-web:latest
@@ -33,7 +35,7 @@ services:
   todosvc:
     image: coeux/todo:latest
     build: ./todo-svc
-    container_name: todo-svc
+    container_name: todosvc
     ports:
       - "8080:8080"
     environment:
@@ -91,9 +93,42 @@ services:
     command: 
       - start-dev
       - --import-realm
+      - --metrics-enabled=true
     ports:
       - "8282:8080"
     networks:
       - backend
     depends_on:
       - db
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/data/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - backend
+    depends_on:
+      - todosvc
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3030:3000"
+    networks:
+      - backend
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+    depends_on:
+      - prometheus
+  postgres-exporter:
+    container_name: postgresexp
+    image: quay.io/prometheuscommunity/postgres-exporter
+    ports:
+      - "9187:9187"
+    environment:
+      - DATA_SOURCE_NAME=postgresql://postgres:mysecretpassword@postgres-db:5432/postgres?sslmode=disable
+    depends_on:
+      - db
+    networks:
+      - backend
