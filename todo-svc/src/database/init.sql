@@ -125,7 +125,11 @@ BEGIN
  User 1
  */
 INSERT INTO MUSER (full_name, email, public_id)
-VALUES ('User_test_1', 'User@test1.com', '672d2e23-b824-41ca-97b0-6efe2d589842')
+VALUES (
+        'User_test_1',
+        'User@test1.com',
+        '672d2e23-b824-41ca-97b0-6efe2d589842'
+    )
 RETURNING id INTO v_muser_id; 
 
 INSERT INTO ACTIVITY (
@@ -187,7 +191,12 @@ VALUES (
     ); 
 
 INSERT INTO LABEL (name, description, public_id, muser_id)
-VALUES ('Label1', 'label 1', '53398f2e-8c80-4515-8c92-7587b75ee5d6', v_muser_id)
+VALUES (
+        'Label1',
+        'label 1',
+        '53398f2e-8c80-4515-8c92-7587b75ee5d6',
+        v_muser_id
+    )
 RETURNING id INTO v_label_id;
 
 INSERT INTO LABEL_ACTIVITY (label_id, activity_id)
@@ -199,5 +208,3 @@ SET label_activity_id = v_label_activity_id
 WHERE id = v_activity_id;
 
 END $$;
-
-

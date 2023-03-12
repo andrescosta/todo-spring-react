@@ -53,9 +53,8 @@ SELECT mu.id AS mu_id,
     ac.state AS ac_state,
     ac.status AS ac_status,
     ac.tags AS ac_tags
-FROM 
-muser AS mu
-JOIN activity AS ac ON mu.id = ac.muser_id
+FROM muser AS mu
+    JOIN activity AS ac ON mu.id = ac.muser_id
 WHERE mu.public_id = ?;
 /*
  activity by id
@@ -92,9 +91,8 @@ WHERE media.activity_id = ?;
 SELECT lbl.id AS lbl_id,
     lbl.name AS lbl_name,
     lbl.description AS lbl_description
-FROM 
-label_activity AS lbla 
-JOIN label AS lbl ON lbla.label_id = lbl.id
+FROM label_activity AS lbla
+    JOIN label AS lbl ON lbla.label_id = lbl.id
 WHERE lbla.activity_id = ?;
 
 DO $$ BEGIN
@@ -107,10 +105,7 @@ WHERE ac.public_id = 'f129017c-e576-4098-884d-398107a65018';
  WHERE ac.id = _act.id;
  
  */
-END $$
-
-
-ac_id,
+END $$ ac_id,
 ac_public_id,
 ac_created_at,
 ac_updated_at,

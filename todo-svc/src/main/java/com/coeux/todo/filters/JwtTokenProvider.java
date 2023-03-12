@@ -34,8 +34,7 @@ public class JwtTokenProvider {
     private static final String AUTHORITIES_KEY = "roles";
 
     @Value("${jwt.clockSkew}")
-    long clockSkew; 
-
+    long clockSkew;
 
     @Value("${jwt.jwksURI}")
     URI jwksURI;
