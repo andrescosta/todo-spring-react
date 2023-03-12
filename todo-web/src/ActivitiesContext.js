@@ -1,6 +1,5 @@
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
-import { getActivities } from './ActivitiesService'
-
+import React, { createContext, useContext, useReducer, useEffect } from "react";
+import { getActivities } from "./ActivitiesService";
 
 const ActivitiesContext = createContext(null);
 
@@ -32,27 +31,24 @@ export const Events = {
   UPDATED: Symbol("updated"),
   DELETED: Symbol("deleted"),
   FILTEREDBYTYPE: Symbol("filteredbytype"),
-  FILTERRESETED: Symbol("notfiltered")
-
-}
-
+  FILTERRESETED: Symbol("notfiltered"),
+};
 
 function activitiesReducer(activities, action) {
   switch (action.type) {
     case Events.LOADED: {
-      return { ok: action.result.ok, data: [...action.result.data] }
+      return { ok: action.result.ok, data: [...action.result.data] };
     }
     case Events.ADDED: {
       let ret = {
-        ok: true, data: [...activities.data,
-        action.data
-        ]
+        ok: true,
+        data: [...activities.data, action.data],
       };
       console.log(ret);
       return ret;
     }
     case Events.UPDATED: {
-      return activities.map(t => {
+      return activities.map((t) => {
         if (t.id === action.task.id) {
           return action.task;
         } else {
@@ -61,26 +57,37 @@ function activitiesReducer(activities, action) {
       });
     }
     case Events.DELETED: {
-      return { ok: true, data: activities.data.filter(t => t.publicId !== action.id) };
+      return {
+        ok: true,
+        data: activities.data.filter((t) => t.publicId !== action.id),
+      };
     }
     case Events.FILTEREDBYTYPE: {
-      return { ok: true, data: activities.data.map(obj => ({ ...obj, show: obj.type === action.typeActivity })) };
+      return {
+        ok: true,
+        data: activities.data.map((obj) => ({
+          ...obj,
+          show: obj.type === action.typeActivity,
+        })),
+      };
     }
     case Events.FILTERRESETED: {
-      return { ok: true, data: activities.data.map(obj => ({ ...obj, show: true })) };
+      return {
+        ok: true,
+        data: activities.data.map((obj) => ({ ...obj, show: true })),
+      };
     }
     default: {
-      throw Error('Unknown action: ' + action.type);
+      throw Error("Unknown action: " + action.type);
     }
   }
 }
 
-
 function useData() {
-  const [activities, dispatch] = useReducer(
-    activitiesReducer,
-    { ok: true, data: [] }
-  );
+  const [activities, dispatch] = useReducer(activitiesReducer, {
+    ok: true,
+    data: [],
+  });
   useEffect(() => {
     async function fetchData() {
       let ignore = false;

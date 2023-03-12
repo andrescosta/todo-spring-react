@@ -1,7 +1,7 @@
 PENDIENTES
 
 Roadmap:
-MONITORING
+MONITORING-COMPLETED
 OpenAPI
 NGINX
 TESTING WITH TESTCONTAINERS AND AUTOMATION(check https://tomaszs2.medium.com/jest-29-5-0-will-run-your-tests-randomly-ec39a27cf09c) AND PERFORMANCE
