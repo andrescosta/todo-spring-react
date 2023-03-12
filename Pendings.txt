@@ -1,10 +1,23 @@
 PENDIENTES
 
 Roadmap:
-MONITORING-COMPLETED
-OpenAPI
-NGINX
-TESTING WITH TESTCONTAINERS AND AUTOMATION(check https://tomaszs2.medium.com/jest-29-5-0-will-run-your-tests-randomly-ec39a27cf09c) AND PERFORMANCE
+
+* Monitoring-[COMPLETED]
+* Nginx
+
+* Testing:
+- With Test containers
+- UI Automation: 
+  - https://tomaszs2.medium.com/jest-29-5-0-will-run-your-tests-randomly-ec39a27cf09c 
+- Performance
+  - https://k6.io/
+  - https://gatling.io/
+
+
+* Documentation:
+- https://springdoc.org/v2/ 
+- https://docs.spring.io/spring-restdocs/docs/current/reference/htmlsingle/
+
 KUBERNETES/ISTIO
 Kafka AND WEBSOCKETS
 CLOUD PROVIDERS
