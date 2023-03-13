@@ -18,6 +18,7 @@
 				"username": "postgres",
 				"password": "mysecretpassword"
 			}
-		]
+		],
+		"java.configuration.runtimes": []
 	}
 }
