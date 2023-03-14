@@ -15,16 +15,15 @@ volumes:
   grafana_data:
     driver: local
 services:
-  todoweb:
+  todo-web:
     image: coeux/todo-web:latest
     build: ./todo-web
-    container_name: todo-web
     ports:
       - "3000:3000"
     networks:
       - backend
     depends_on:
-      - db
+      - postgres-db
       - keycloak
       - todosvc
     healthcheck:
@@ -35,7 +34,6 @@ services:
   todosvc:
     image: coeux/todo:latest
     build: ./todo-svc
-    container_name: todosvc
     ports:
       - "8080:8080"
     environment:
@@ -43,16 +41,15 @@ services:
     networks:
       - backend
     depends_on:
-      - db
+      - postgres-db
       - keycloak
     healthcheck:
       test: curl -f http://localhost:8080/activities || exit 1
       interval: 1m
       timeout: 10s
       retries: 2
-  db:
+  postgres-db:
     image: postgres:15
-    container_name: postgres-db
     restart: always
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -76,7 +73,6 @@ services:
       retries: 2
   keycloak:
     image: quay.io/keycloak/keycloak:latest
-    container_name: keycloak
     volumes:
       - ./keycloak/data:/opt/keycloak/data/import
     environment:
@@ -99,7 +95,7 @@ services:
     networks:
       - backend
     depends_on:
-      - db
+      - postgres-db
   prometheus:
     image: prom/prometheus
     ports:
@@ -122,13 +118,12 @@ services:
     depends_on:
       - prometheus
   postgres-exporter:
-    container_name: postgresexp
     image: quay.io/prometheuscommunity/postgres-exporter
     ports:
       - "9187:9187"
     environment:
       - DATA_SOURCE_NAME=postgresql://postgres:mysecretpassword@postgres-db:5432/postgres?sslmode=disable
     depends_on:
-      - db
+      - postgres-db
     networks:
       - backend

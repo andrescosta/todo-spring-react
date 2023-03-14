@@ -1,0 +1,1 @@
+.\mvnw surefire:test

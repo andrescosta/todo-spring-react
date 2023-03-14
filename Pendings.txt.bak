@@ -8,7 +8,7 @@ https://12factor.net/
 * Nginx
 
 * Testing:
-- With Test containers - [COMPLETED]
+- With Test containers
 - UI Automation: 
   - https://tomaszs2.medium.com/jest-29-5-0-will-run-your-tests-randomly-ec39a27cf09c 
 - Performance
@@ -20,18 +20,11 @@ https://12factor.net/
 - https://springdoc.org/v2/ 
 - https://docs.spring.io/spring-restdocs/docs/current/reference/htmlsingle/
 
-*CI/CD
-- Explore github actions, etc.
-- Production configuration
-
 KUBERNETES/
 Service mesh ISTIO
 Kafka AND WEBSOCKETS
 CLOUD PROVIDERS
 
-https://zipkin.io/
-
-https://github.com/TNG/ArchUnit
 
 SERVICE:
 Scala
