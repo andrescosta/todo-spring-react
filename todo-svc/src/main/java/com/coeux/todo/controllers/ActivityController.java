@@ -32,7 +32,7 @@ public class ActivityController {
     @Autowired
     ActivityRepository repository;
 
-    Logger logger = LoggerFactory.getLogger(ActivityController.class);
+    final private static Logger logger = LoggerFactory.getLogger(ActivityController.class);
 
     @GetMapping
     @CrossOrigin(origins = "http://localhost:8080")
@@ -59,6 +59,9 @@ public class ActivityController {
 
     @PostMapping
     @CrossOrigin(origins = "http://localhost:8080")
+    @Observed(name = "user.activities", contextualName = "new-user-activity", lowCardinalityKeyValues = {
+        "userType", "userType2" })
+    //TODO: remove userType
     public Activity postActivity(Principal principal, @RequestBody Activity activity) {
         UsernamePasswordAuthenticationToken principal1 = (UsernamePasswordAuthenticationToken) principal;
         UUID publicId = UUID.fromString(((User) principal1.getPrincipal()).getUsername());
@@ -74,6 +77,9 @@ public class ActivityController {
 
     @DeleteMapping("/{publicId}")
     @CrossOrigin(origins = "http://localhost:8080")
+    @Observed(name = "user.activities", contextualName = "del-user-activity", lowCardinalityKeyValues = {
+        "userType", "userType2" })
+    //TODO: remove userType
     public void deleteActivity(@PathVariable UUID publicId) {
         repository.deleteActivity(publicId);
     }
