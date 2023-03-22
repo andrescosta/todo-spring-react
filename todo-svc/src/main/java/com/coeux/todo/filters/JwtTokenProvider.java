@@ -29,7 +29,7 @@ import jakarta.annotation.PostConstruct;
 @Component
 public class JwtTokenProvider {
 
-    Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
+    private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
 
     private static final String AUTHORITIES_KEY = "roles";
 

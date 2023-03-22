@@ -42,7 +42,7 @@ public class ActivityRepository {
 
     JsonParser parser;
 
-    Logger logger = LoggerFactory.getLogger(ActivityRepository.class);
+    static private final Logger logger = LoggerFactory.getLogger(ActivityRepository.class);
 
     public ActivityRepository() {
         this.parser = JsonParserFactory.getJsonParser();
@@ -184,6 +184,7 @@ public class ActivityRepository {
     }
 
     public List<Activity> getActivitiesByUser(UUID publicId) {
+        logger.info("query by user: "+ publicId );
         var res = jdbcTemplate.query(QUERY_ACTIVITIES_BY_USER, new ActivityRowMapper(),
                 new Object[] { publicId });
         return res;

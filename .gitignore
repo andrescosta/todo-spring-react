@@ -7,6 +7,7 @@ HELP.md
 !**/src/test/**/target/
 **\node_modules
 **\dist
+tempo-data
 
 ### STS ###
 .apt_generated
