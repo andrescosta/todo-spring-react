@@ -23,6 +23,8 @@ import com.coeux.todo.data.ActivityRepository;
 import com.coeux.todo.entities.Activity;
 import com.coeux.todo.entities.ActivityType;
 
+import io.micrometer.observation.annotation.Observed;
+
 @RestController
 @RequestMapping("/activities")
 public class ActivityController {
@@ -34,6 +36,9 @@ public class ActivityController {
 
     @GetMapping
     @CrossOrigin(origins = "http://localhost:8080")
+    @Observed(name = "user.activities", contextualName = "getting-user-activities", lowCardinalityKeyValues = {
+            "userType", "userType2" })
+    //TODO: remove userType
     public List<Activity> getActivities(Principal principal) {
         UsernamePasswordAuthenticationToken principal1 = (UsernamePasswordAuthenticationToken) principal;
         UUID publicId = UUID.fromString(((User) principal1.getPrincipal()).getUsername());

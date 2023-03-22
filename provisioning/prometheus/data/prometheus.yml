@@ -8,19 +8,19 @@ scrape_configs:
       - targets: ['localhost:9090']
 
   - job_name: 'todosvc-metrics'
-    metrics_path: '/actuator/prometheus' # Job to scrape application metrics
+    metrics_path: '/actuator/prometheus' # Job to scrape TODO Svc metrics
     scrape_interval: 5s
     static_configs:
-      - targets: ['todosvc:8080']
+      - targets: ['todosvc:8080','todosvc:6543']
 
   - job_name: 'keycloak-metrics'
-    metrics_path: '/metrics' # Job to scrape application metrics
+    metrics_path: '/metrics' # Job to scrape keycloak(authn/authz) metrics
     scrape_interval: 5s
     static_configs:
       - targets: ['keycloak:8080']
   
   - job_name: 'postgresql-metrics'
-    metrics_path: '/metrics' # Job to scrape application metrics
+    metrics_path: '/metrics' # Job to scrape posgresql metrics
     scrape_interval: 5s
     static_configs:
       - targets: ['postgresexp:9187']
