@@ -1,1 +1,1 @@
-git clone https://github.com/andrescosta/todo-spring-react.git --config core.autocrlf=input
+
