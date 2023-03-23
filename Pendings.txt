@@ -3,6 +3,7 @@ PENDIENTES
 Roadmap:
 
 https://12factor.net/
+https://www.youtube.com/watch?v=7swoLEqABhQ
 
 Error handling:
 https://github.com/wimdeblauwe/error-handling-spring-boot-starter
@@ -11,11 +12,12 @@ https://github.com/wimdeblauwe/error-handling-spring-boot-starter
 (metrics, logs, traces, continuous profiling)
 - Time series metrics and monitoring system/database / Data query, visualize, alerting platform
 Prometheus/Grafana [COMPLETED]
-- Logs 
-- Distributed tracing backend
+- Logs [COMPLETED] 
+- Distributed tracing backend [COMPLETED]
 - https://www.cncf.io/blog/2022/05/31/what-is-continuous-profiling/
 - https://grafana.com/blog/2022/11/02/announcing-grafana-phlare-oss-continuous-profiling-database/
 - https://techcrunch.com/2023/03/15/grafana-acquires-pyroscope-and-merges-it-with-its-phlare-continuous-profiling-database
+- https://github.com/grafana/faro-web-sdk/blob/main/packages/react/README.md
 
 * Nginx
 
@@ -66,6 +68,7 @@ Python
 
 
 WEB:
+Boot + Thymeleaf + HTMX
 https://github.com/TanStack/query
 https://kentcdodds.com/blog/application-state-management-with-react (use memo and dispatcher)
 https://qwik.builder.io/
