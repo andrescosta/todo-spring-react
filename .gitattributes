@@ -1,2 +1,4 @@
 provisioning/todo-db/01-init-svc.sh text eol=lf
 provisioning/todo-db/02-init-keycloak.sh text eol=lf
+todo-svc/mvnw text eol=lf
+test/mvnw text eol=lf
