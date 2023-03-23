@@ -1,4 +1,4 @@
-package com.coeux.todo.filters;
+package com.coeux.todo.jwt.jwk;
 
 /*
  * Copyright 2018-Present Okta, Inc.

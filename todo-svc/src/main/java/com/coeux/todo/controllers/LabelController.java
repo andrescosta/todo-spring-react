@@ -2,6 +2,7 @@ package com.coeux.todo.controllers;
 
 import java.util.List;
 import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.coeux.todo.data.ActivityRepository;
+import com.coeux.todo.data.LabelRepository;
 import com.coeux.todo.entities.Label;
 
 @RestController
@@ -18,7 +19,7 @@ import com.coeux.todo.entities.Label;
 public class LabelController {
 
     @Autowired
-    ActivityRepository repository;
+    LabelRepository repository;
 
     @GetMapping("/users/{publicId}")
     public List<Label> getLabels(@PathVariable UUID publicId) {

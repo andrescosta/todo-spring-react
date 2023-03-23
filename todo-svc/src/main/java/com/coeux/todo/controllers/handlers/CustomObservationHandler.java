@@ -10,11 +10,10 @@ import io.micrometer.common.KeyValue;
 import io.micrometer.observation.Observation;
 import io.micrometer.observation.ObservationHandler;
 
-// Example of plugging in a custom handler that in this case will print a statement before and after all observations take place
 @Component
-class MyHandler implements ObservationHandler<Observation.Context> {
+class CustomObservationHandler implements ObservationHandler<Observation.Context> {
 
-    private static final Logger log = LoggerFactory.getLogger(MyHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(CustomObservationHandler.class);
 
     private boolean checkContext(String name) {
         return name!=null && name.equals("user.activities");

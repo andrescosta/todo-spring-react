@@ -11,12 +11,14 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.coeux.todo.jwt.JwtTokenAuthenticationProvider;
+
 @Configuration
 public class SecurityConfig {
 
         @Bean
         SecurityFilterChain springWebFilterChain(HttpSecurity http,
-                        JwtTokenProvider tokenProvider) throws Exception {
+                        JwtTokenAuthenticationProvider tokenProvider) throws Exception {
 
                 return http
                                 .httpBasic(AbstractHttpConfigurer::disable)

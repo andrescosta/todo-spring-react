@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "http.allowedOrigins",
+    "type": "java.lang.String",
+    "description": "A description for 'http.allowedOrigins'"
+  },
+  {
+    "name": "jwt.jwksURI",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.jwksURI'"
+  },
+  {
+    "name": "jwt.clockSkew",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.clockSkew'"
+  }
+]}
