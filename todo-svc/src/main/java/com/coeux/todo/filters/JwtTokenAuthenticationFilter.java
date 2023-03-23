@@ -9,6 +9,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
 
+import com.coeux.todo.jwt.JwtTokenAuthenticationProvider;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
@@ -16,15 +18,15 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 
 /* 
- * Inspired by https://github.com/hantsy/spring-webmvc-jwt-sample
+ * With the help of https://github.com/hantsy/spring-webmvc-jwt-sample
 */
 public class JwtTokenAuthenticationFilter extends GenericFilterBean {
 
     public static final String HEADER_PREFIX = "Bearer ";
 
-    private JwtTokenProvider jwtTokenProvider = null;
+    private JwtTokenAuthenticationProvider jwtTokenProvider = null;
 
-    public JwtTokenAuthenticationFilter(JwtTokenProvider tokenProvider) {
+    public JwtTokenAuthenticationFilter(JwtTokenAuthenticationProvider tokenProvider) {
         this.jwtTokenProvider = tokenProvider;
     }
 

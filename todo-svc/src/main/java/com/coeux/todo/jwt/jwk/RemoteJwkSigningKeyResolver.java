@@ -1,4 +1,4 @@
-package com.coeux.todo.filters;
+package com.coeux.todo.jwt.jwk;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,18 +26,15 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.SigningKeyResolver;
 import io.jsonwebtoken.io.Decoders;
 
-// Updated from: https://github.com/okta/okta-jwt-verifier-java/blob/master/impl/src/main/java/com/okta/jwt/impl/jjwt/RemoteJwkSigningKeyResolver.java
+// With the help of: https://github.com/okta/okta-jwt-verifier-java/blob/master/impl/src/main/java/com/okta/jwt/impl/jjwt/RemoteJwkSigningKeyResolver.java
 public final class RemoteJwkSigningKeyResolver implements SigningKeyResolver {
 
     private final URI jwkUri;
-    private final HttpClient httpClient;
-    private final ObjectMapper objectMapper = new ObjectMapper();
     private final Object lock = new Object();
     private volatile Map<String, Key> keyMap = new HashMap<>();
 
-    public RemoteJwkSigningKeyResolver(URI jwkUri, HttpClient httpClient) {
+    public RemoteJwkSigningKeyResolver(URI jwkUri) {
         this.jwkUri = jwkUri;
-        this.httpClient = httpClient;
     }
 
     @Override
@@ -52,21 +49,17 @@ public final class RemoteJwkSigningKeyResolver implements SigningKeyResolver {
 
     private Key getKey(String keyId) {
 
-        // check non synchronized to avoid a lock
         Key result = keyMap.get(keyId);
         if (result != null) {
             return result;
         }
 
         synchronized (lock) {
-            // once synchronized, check the map once again the a previously
-            // synchronized thread could have already updated they keys
             result = keyMap.get(keyId);
             if (result != null) {
                 return result;
             }
 
-            // finally, fallback to updating the keys, an return a value (or null)
             updateKeys();
             return keyMap.get(keyId);
         }
@@ -74,11 +67,12 @@ public final class RemoteJwkSigningKeyResolver implements SigningKeyResolver {
 
     public void updateKeys() {
         try {
+            ObjectMapper objectMapper = new ObjectMapper();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(jwkUri)
                     .GET()
                     .build();
-            HttpResponse<InputStream> response = httpClient.send(request, BodyHandlers.ofInputStream());
+            HttpResponse<InputStream> response = HttpClient.newHttpClient().send(request, BodyHandlers.ofInputStream());
             Map<String, Key> newKeys = objectMapper.readValue(response.body(), JwkKeys.class).getKeys().stream()
                     .filter(jwkKey -> "sig".equals(jwkKey.getPublicKeyUse()))
                     .filter(jwkKey -> "RSA".equals(jwkKey.getKeyType()))

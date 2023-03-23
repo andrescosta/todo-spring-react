@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.coeux.todo.data.ActivityRepository;
+import com.coeux.todo.data.MUserRepository;
 import com.coeux.todo.entities.Activity;
 import com.coeux.todo.entities.MUser;
 
@@ -21,7 +21,7 @@ import com.coeux.todo.entities.MUser;
 public class MUserController {
 
     @Autowired
-    ActivityRepository repository;
+    MUserRepository repository;
 
     @GetMapping
     public Activity[] getMUSers() {

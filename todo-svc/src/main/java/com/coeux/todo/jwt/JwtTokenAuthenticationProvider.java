@@ -1,10 +1,7 @@
-package com.coeux.todo.filters;
+package com.coeux.todo.jwt;
 
 import java.net.URI;
-import java.net.http.HttpClient;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,10 +13,13 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
+import com.coeux.todo.jwt.jwk.RemoteJwkSigningKeyResolver;
+
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Clock;
 import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SigningKeyResolver;
 import jakarta.annotation.PostConstruct;
 
 /* 
@@ -27,13 +27,15 @@ import jakarta.annotation.PostConstruct;
 */
 
 @Component
-public class JwtTokenProvider {
+public class JwtTokenAuthenticationProvider {
 
-    private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
+    private static final Logger logger = LoggerFactory.getLogger(JwtTokenAuthenticationProvider.class);
 
     private static final String AUTHORITIES_KEY = "roles";
 
-    @Value("${jwt.clockSkew}")
+    private JwtParser jwtParser;
+
+    @Value("${jwt.clockSkew:5}")
     long clockSkew;
 
     @Value("${jwt.jwksURI}")
@@ -41,14 +43,11 @@ public class JwtTokenProvider {
 
     @PostConstruct
     public void init() {
+        jwtParser = buildJwtParser(new RemoteJwkSigningKeyResolver(getJwksURI()));
     }
 
     public Authentication getAuthentication(String token) {
-        var res = new RemoteJwkSigningKeyResolver(getJwksURI(), HttpClient.newHttpClient());
-        Claims claims = Jwts.parserBuilder()
-                .setSigningKeyResolver(res)
-                .setClock(new MyClock())
-                .build()
+        Claims claims = jwtParser
                 .parseClaimsJws(token)
                 .getBody();
 
@@ -64,29 +63,14 @@ public class JwtTokenProvider {
 
     public boolean validateToken(String token) {
         try {
-            var res = new RemoteJwkSigningKeyResolver(getJwksURI(), HttpClient.newHttpClient());
-            Jws<Claims> claims = Jwts
-                    .parserBuilder()
-                    .setSigningKeyResolver(res)
-                    .setClock(new MyClock())
-                    .build()
+            Jws<Claims> claims = jwtParser
                     .parseClaimsJws(token);
-            logger.info("expiration date: {}", claims.getBody().getExpiration());
+            logger.debug("expiration date: {}", claims.getBody().getExpiration());
             return true;
         } catch (Exception e) {
             logger.error("Invalid JWT token: {}", e.getMessage());
         }
         return false;
-    }
-
-    // For debugging
-    public static class MyClock implements Clock {
-        public Date now() {
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(new Date());
-            cal.add(Calendar.YEAR, -1);
-            return cal.getTime();
-        }
     }
 
     private long getClockSkew() {
@@ -95,6 +79,14 @@ public class JwtTokenProvider {
 
     private URI getJwksURI() {
         return jwksURI;
+    }
+
+    private JwtParser buildJwtParser(SigningKeyResolver resolver) {
+        return Jwts
+                .parserBuilder()
+                .setAllowedClockSkewSeconds(getClockSkew())
+                .setSigningKeyResolver(resolver)
+                .build();
     }
 
 }
