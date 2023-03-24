@@ -37,6 +37,9 @@ Prometheus/Grafana [COMPLETED]
 * CI/CD
 - Explore github actions, etc.
 - Production configuration
+Easily generate Terraform and Bicep templates for your project.
+Automate your infrastructure using GitOps best practices with GitHub Actions.
+https://nubesgen.com/
 
 * KUBERNETES
 - Service mesh ISTIO

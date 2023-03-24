@@ -1,0 +1,1 @@
+docker run --add-host=host.docker.internal:host-gateway -e SPRING_PROFILES_ACTIVE=dev -p 3000:3000 todosvc
