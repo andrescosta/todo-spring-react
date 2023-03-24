@@ -17,6 +17,17 @@ volumes:
   tempo-data:
     driver: local
 services:
+  pyroscope:
+    image: pyroscope/pyroscope:latest
+    environment:
+      - PYROSCOPE_LOG_LEVEL=error
+    ports:
+      - "4040:4040"
+    command:
+      - "server"
+      #- "-no-self-profiling"
+    networks:
+      - backend
   todo-web:
     image: coeux/todo-web:latest
     build: ./todo-web
@@ -34,13 +45,21 @@ services:
       timeout: 10s
       retries: 2
   todosvc:
-    extra_hosts: ['host.docker.internal:host-gateway']
     image: coeux/todo:latest
     build: ./todo-svc
     ports:
       - "8080:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=devdocker
+      - PYROSCOPE_APPLICATION_NAME=todo-svc-docker
+      - PYROSCOPE_FORMAT=jfr
+      - PYROSCOPE_PROFILING_INTERVAL=10ms
+      - PYROSCOPE_PROFILER_EVENT=itimer
+      - PYROSCOPE_PROFILER_LOCK=1
+      - PYROSCOPE_PROFILER_ALLOC=100k
+      - PYROSCOPE_UPLOAD_INTERVAL=10s
+      - PYROSCOPE_LOG_LEVEL=error
+      - PYROSCOPE_SERVER_ADDRESS=http://pyroscope:4040
     networks:
       - backend
     depends_on:
@@ -48,6 +67,7 @@ services:
       - keycloak
       - loki
       - tempo
+      - pyroscope
     healthcheck:
       test: curl -f http://localhost:8080/activities || exit 1
       interval: 1m
@@ -121,6 +141,8 @@ services:
     volumes:
       - grafana_data:/var/lib/grafana
       - ./provisioning/grafana/provisioning/:/etc/grafana/provisioning/
+    environment:
+      - GF_INSTALL_PLUGINS=https://github.com/pyroscope-io/grafana-panel-plugin/releases/download/v1.4.2/pyroscope-panel-1.4.2.zip;pyroscope-panel,https://github.com/pyroscope-io/grafana-datasource-plugin/releases/download/v1.2.0/pyroscope-datasource-1.2.0.zip;pyroscope-datasource
     depends_on:
       - prometheus
   postgres-exporter:

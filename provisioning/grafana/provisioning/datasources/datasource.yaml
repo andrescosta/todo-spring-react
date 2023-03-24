@@ -43,3 +43,9 @@ datasources:
                   matcherRegex: ^.*?\b\w+,\s*([^,]+)
                   name: TraceID
                   url: $${__value.raw}
+    - name: Pyroscope
+      type: pyroscope-datasource
+      access: proxy
+      uid: pyroscope
+      jsonData:
+          path: http://pyroscope:4040
