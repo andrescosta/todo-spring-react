@@ -14,20 +14,17 @@ https://github.com/wimdeblauwe/error-handling-spring-boot-starter
 Prometheus/Grafana [COMPLETED]
 - Logs [COMPLETED] 
 - Distributed tracing backend [COMPLETED]
-- https://www.cncf.io/blog/2022/05/31/what-is-continuous-profiling/
-- https://grafana.com/blog/2022/11/02/announcing-grafana-phlare-oss-continuous-profiling-database/
-- https://techcrunch.com/2023/03/15/grafana-acquires-pyroscope-and-merges-it-with-its-phlare-continuous-profiling-database
-- https://github.com/grafana/faro-web-sdk/blob/main/packages/react/README.md
+- Profiling[COMPLETED]
 
 * Nginx
 
 * Testing:
 - With Test containers - [COMPLETED]
-- UI Automation: 
-  - https://tomaszs2.medium.com/jest-29-5-0-will-run-your-tests-randomly-ec39a27cf09c 
 - Performance
   - https://k6.io/
   - https://gatling.io/
+- UI Automation: 
+  - https://tomaszs2.medium.com/jest-29-5-0-will-run-your-tests-randomly-ec39a27cf09c 
 
 
 * Documentation:
@@ -71,6 +68,7 @@ Python
 
 
 WEB:
+https://svelte.dev/
 Boot + Thymeleaf + HTMX
 https://github.com/TanStack/query
 https://kentcdodds.com/blog/application-state-management-with-react (use memo and dispatcher)
@@ -89,32 +87,12 @@ https://docs.docker.com/build/bake/
 Improvements:
 https://mvnrepository.com/artifact/org.keycloak
 
-
-JAEGER:
-  jaeger: 
-    image: jaegertracing/all-in-one:1.42
-    environment:
-      - COLLECTOR_ZIPKIN_HOST_PORT=:9411
-      - COLLECTOR_OTLP_ENABLED=true
-    ports:
-      - 6831:6831/udp 
-      - 6832:6832/udp
-      - 5778:5778
-      - 16686:16686
-      - 4317:4317
-      - 4318:4318
-      - 14250:14250
-      - 14268:14268
-      - 14269:14269
-      - 9411:9411
-    networks:
-      - backend
-
-
-
-
 Grafana LOKI: Logs
 Grafana: metrics
 Grafana TEMPO: distributed tracing backend
 Promteheus: Metrics
 https://grafana.com/oss/tempo/
+Profiling: - https://www.cncf.io/blog/2022/05/31/what-is-continuous-profiling/
+- https://grafana.com/blog/2022/11/02/announcing-grafana-phlare-oss-continuous-profiling-database/
+- https://techcrunch.com/2023/03/15/grafana-acquires-pyroscope-and-merges-it-with-its-phlare-continuous-profiling-database
+- https://github.com/grafana/faro-web-sdk/blob/main/packages/react/README.md
