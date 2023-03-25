@@ -1,0 +1,1 @@
+Set network.proxy.allow_hijacking_localhost to TRUE at about:config to run the tests locally(localhost) in Firefox.
