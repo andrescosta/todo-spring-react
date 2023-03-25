@@ -1,0 +1,25 @@
+{
+    "name":"Link-2",
+    "description":"This is a link",
+    "type":"LINK",
+    "state":0,
+    "status":0,
+    "tags":["t1","t2"],
+    "extraData": {
+        "uno":"1",
+        "dos":2
+    },
+    "media":[
+        {
+            "name":"media1",
+            "description":"media1",
+            "type":"IMAGE",
+            "uri":"http://www.a.com/j.jpg",
+            "extraData": {
+                "uno":"1",
+                "dos":2
+            }
+        }
+    ]
+}
+
