@@ -53,6 +53,7 @@ public class TestActivitiesService {
                 "password", "123");
 
         var token = given()
+                //.proxy("127.0.0.1", 8000)
                 .formParams(formData)
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .expect()
@@ -68,6 +69,7 @@ public class TestActivitiesService {
 
     public void assertPostActivity(String tok) {
         given()
+                //.proxy("127.0.0.1", 8000)
                 .body(BODY_ACT)
                 .header("content-type", "application/json")
                 .header("Authorization", tok)
@@ -80,6 +82,7 @@ public class TestActivitiesService {
 
     public void assetGetActivities(String tok) {
         given()
+                //.proxy("127.0.0.1", 8000)
                 .header("content-type", "application/json")
                 .header("Authorization", tok)
                 .expect()
