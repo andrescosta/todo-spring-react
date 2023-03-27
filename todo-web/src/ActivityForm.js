@@ -23,6 +23,7 @@ export default function ActivityForm({ toggleModal }) {
     let newobj = {
       name: entries.name,
       description: entries.description,
+      type: entries.type,
       tags,
       media: [media],
     };
