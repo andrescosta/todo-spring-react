@@ -75,6 +75,7 @@ public class ActivityController {
         "userType", "userType2" })
     //TODO: remove userType
     public void deleteActivity(@PathVariable UUID publicId) {
+        log.debug("Deleting id:" + publicId);
         service.deleteActivity(publicId);
     }
 
