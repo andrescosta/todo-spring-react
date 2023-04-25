@@ -29,12 +29,15 @@ public class ActivityService {
         return activityRepository.saveActivity(user, activity);
     }
 
-    public void deleteActivity(UUID publicId) {
-        activityRepository.deleteActivity(publicId);
+    public void deleteActivity(UUID muserPublicId, UUID publicId) {
+        var activity = getActivityByPublicId(muserPublicId, publicId);
+        if (activity != null) {
+            activityRepository.deleteActivity(publicId);
+        }
     }
 
-    public Activity getActivityByPublicId(UUID publicId) {
-        return activityRepository.getActivityByPublicId(publicId);
+    public Activity getActivityByPublicId(UUID muserPublicId, UUID publicId) {
+        return activityRepository.getActivityByPublicId(muserPublicId, publicId);
     }
 
     public List<Activity> getActivitiesByType(UUID publicId, ActivityType type) {

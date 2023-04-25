@@ -1,12 +1,9 @@
 package com.coeux.todo.controllers.handlers;
 
-import java.util.stream.StreamSupport;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import io.micrometer.common.KeyValue;
 import io.micrometer.observation.Observation;
 import io.micrometer.observation.ObservationHandler;
 
@@ -22,15 +19,13 @@ class CustomObservationHandler implements ObservationHandler<Observation.Context
     @Override
     public void onStart(Observation.Context context) {
         if (!checkContext(context.getName())) return;
-        log.info("Before running the observation for context [{}], userType [{}]", context.getName(),
-                getUserTypeFromContext(context));
+        log.info("Before running the observation for context [{}]", context.getName());
     }
 
     @Override
     public void onStop(Observation.Context context) {
         if (!checkContext(context.getName())) return;
-        log.info("After running the observation for context [{}], userType [{}]", context.getName(),
-                getUserTypeFromContext(context));
+        log.info("After running the observation for context [{}], userType [{}]", context.getName());
     }
 
     @Override
@@ -38,11 +33,11 @@ class CustomObservationHandler implements ObservationHandler<Observation.Context
         return true;
     }
 
-    private String getUserTypeFromContext(Observation.Context context) {
+    /*private String getUserTypeFromContext(Observation.Context context) {
         return StreamSupport.stream(context.getLowCardinalityKeyValues().spliterator(), false)
                 .filter(keyValue -> "userType".equals(keyValue.getKey()))
                 .map(KeyValue::getValue)
                 .findFirst()
                 .orElse("UNKNOWN");
-    }
+    }*/
 }

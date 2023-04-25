@@ -1,5 +1,7 @@
 package com.coeux.todo.filters;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -16,10 +18,10 @@ import com.coeux.todo.jwt.JwtTokenAuthenticationProvider;
 @Configuration
 public class SecurityConfig {
 
+        Logger log = LoggerFactory.getLogger(SecurityConfig.class);
         @Bean
         SecurityFilterChain springWebFilterChain(HttpSecurity http,
                         JwtTokenAuthenticationProvider tokenProvider) throws Exception {
-
                 return http
                                 .httpBasic(AbstractHttpConfigurer::disable)
                                 .csrf(AbstractHttpConfigurer::disable)

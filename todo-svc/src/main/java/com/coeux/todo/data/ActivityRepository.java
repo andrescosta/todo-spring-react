@@ -71,9 +71,9 @@ public class ActivityRepository {
                 new Object[] { publicId, type.toString() });
     }
 
-    public Activity getActivityByPublicId(UUID publicId) {
+    public Activity getActivityByPublicId(UUID muserPublicId, UUID publicId) {
         return jdbcTemplate.queryForObject(SELECT_ACTIVITY_BY_PUBLIC_ID, new ActivityRowMapper(),
-                new Object[] { publicId });
+                new Object[] { muserPublicId, publicId });
     }
 
     @Transactional
@@ -226,7 +226,9 @@ public class ActivityRepository {
                 ac.status AS ac_status,
                 ac.tags AS ac_tags,
                 ac.extra_data AS ac_extra_data
-            FROM activity AS ac
-            WHERE ac.public_id = ?;
+            FROM
+            muser AS mu
+            JOIN activity AS ac ON mu.id = ac.muser_id
+            WHERE mu.public_id = ? and ac.public_id = ?;
                     """;
 }

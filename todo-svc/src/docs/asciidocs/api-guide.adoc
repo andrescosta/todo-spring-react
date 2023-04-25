@@ -1,0 +1,211 @@
+= TODO service Guide
+API;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+[[overview]]
+= Overview
+
+[[overview-http-verbs]]
+== HTTP verbs
+
+The Activity API supports most of the REST .
+
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource
+
+| `POST`
+| Used to create a new resource
+
+| `PATCH`
+| Used to update an existing resource, including partial updates [NOT SUPPORTED]
+
+| `DELETE`
+| Used to delete an existing resource
+|===
+
+RESTful notes tries to adhere as closely as possible to standard HTTP and REST conventions in its
+use of HTTP status codes.
+
+|===
+| Status code | Usage
+
+| `200 OK`
+| The request completed successfully
+
+| `201 Created`
+| A new resource has been created successfully. The resource's URI is available from the response's
+`Location` header
+
+| `204 No Content`
+| An update to an existing resource has been applied successfully
+
+| `400 Bad Request`
+| The request was malformed. The response body will include an error providing further information
+
+| `404 Not Found`
+| The requested resource did not exist
+|===
+
+
+[[resources]]
+= Services
+
+[[resources-CRUD]]
+== Activity 
+
+This service
+
+[[resources-activity-list]]
+=== By user
+
+Returns the activities associated to the user.
+
+==== HTTP request
+
+include::{snippets}/AcitivityAPIDocsTests/listActivitiesByUser/http-request.adoc[]
+
+==== HTTP response
+
+include::{snippets}/AcitivityAPIDocsTests/listActivitiesByUser/http-response.adoc[]
+
+==== Request header
+
+include::{snippets}/AcitivityAPIDocsTests/listActivitiesByUser/request-headers.adoc[]
+
+==== Response fields
+
+include::{snippets}/AcitivityAPIDocsTests/listActivitiesByUser/response-fields.adoc[]
+
+==== Response body
+
+include::{snippets}/AcitivityAPIDocsTests/listActivitiesByUser/response-body.adoc[]
+
+==== CURL request
+
+include::{snippets}/AcitivityAPIDocsTests/listActivitiesByUser/curl-request.adoc[]
+
+==== HTTPie request
+
+include::{snippets}/AcitivityAPIDocsTests/listActivitiesByUser/httpie-request.adoc[]
+
+[[resources-activity-get]]
+=== By public id
+
+Returns an activity.
+
+==== HTTP request
+
+include::{snippets}/AcitivityAPIDocsTests/getActivityByPublicId/http-request.adoc[]
+
+==== HTTP response
+
+include::{snippets}/AcitivityAPIDocsTests/getActivityByPublicId/http-response.adoc[]
+
+==== Request headers
+
+include::{snippets}/AcitivityAPIDocsTests/getActivityByPublicId/request-headers.adoc[]
+
+==== Path parameters
+
+include::{snippets}/AcitivityAPIDocsTests/getActivityByPublicId/path-parameters.adoc[]
+
+==== Response fields
+
+include::{snippets}/AcitivityAPIDocsTests/getActivityByPublicId/response-fields.adoc[]
+
+==== Request body
+
+include::{snippets}/AcitivityAPIDocsTests/getActivityByPublicId/request-body.adoc[]
+
+==== Response body
+
+include::{snippets}/AcitivityAPIDocsTests/getActivityByPublicId/response-body.adoc[]
+
+==== CURL request
+
+include::{snippets}/AcitivityAPIDocsTests/getActivityByPublicId/curl-request.adoc[]
+
+==== HTTPie request
+
+include::{snippets}/AcitivityAPIDocsTests/getActivityByPublicId/httpie-request.adoc[]
+
+
+[[resources-crud-post]]
+=== New
+
+Save an activity.
+
+==== Request body
+
+include::{snippets}/AcitivityAPIDocsTests/createActivity/request-body.adoc[]
+
+==== Request headers
+
+include::{snippets}/AcitivityAPIDocsTests/createActivity/request-headers.adoc[]
+
+==== Request fields
+
+include::{snippets}/AcitivityAPIDocsTests/createActivity/request-fields.adoc[]
+
+==== Response body
+
+include::{snippets}/AcitivityAPIDocsTests/createActivity/response-body.adoc[]
+
+==== Response fields
+
+include::{snippets}/AcitivityAPIDocsTests/createActivity/response-fields.adoc[]
+
+==== HTTP request
+
+include::{snippets}/AcitivityAPIDocsTests/createActivity/http-request.adoc[]
+
+==== HTTP response
+
+include::{snippets}/AcitivityAPIDocsTests/createActivity/http-response.adoc[]
+
+==== CURL request
+
+include::{snippets}/AcitivityAPIDocsTests/createActivity/curl-request.adoc[]
+
+==== HTTPie request
+
+include::{snippets}/AcitivityAPIDocsTests/createActivity/httpie-request.adoc[]
+
+
+[[resources-crud-delete]]
+
+=== Delete 
+
+The deletes the provided activity.
+
+==== HTTP Request
+
+include::{snippets}/AcitivityAPIDocsTests/deleteActivity/http-request.adoc[]
+
+==== HTTP response
+
+include::{snippets}/AcitivityAPIDocsTests/deleteActivity/http-response.adoc[]
+
+==== Request Headers
+
+include::{snippets}/AcitivityAPIDocsTests/deleteActivity/request-headers.adoc[]
+
+==== Path Parameters
+
+include::{snippets}/AcitivityAPIDocsTests/deleteActivity/path-parameters.adoc[]
+
+==== CURL request
+
+include::{snippets}/AcitivityAPIDocsTests/deleteActivity/curl-request.adoc[]
+
+==== HTTPie request
+
+include::{snippets}/AcitivityAPIDocsTests/deleteActivity/httpie-request.adoc[]

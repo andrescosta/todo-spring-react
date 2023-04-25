@@ -9,4 +9,6 @@ public record Activity(@JsonIgnore long id, UUID publicId, String name, String d
                  MUser muser, ActivityType type, ActivityState state,
                 ActivityStatus status, String[] tags, Media[] media, Label[] labels,
                 Map<String, Object> extraData) {
+
+   
 }

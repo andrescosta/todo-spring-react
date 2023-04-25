@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public record MUser(long id, UUID publicId, String name, String email, @JsonIgnore ExtraInfo extraInfo,
+public record MUser(@JsonIgnore long id, UUID publicId, String name, String email, @JsonIgnore ExtraInfo extraInfo,
         Activity[] activities) {
 
     public MUser(long id) {
