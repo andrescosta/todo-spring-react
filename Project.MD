@@ -7,19 +7,37 @@
 ```mermaid
 erDiagram
   User ||--o{ Activity : creates
-    User {
-        int id PK
-        string name
-        string mail
-    }
-    Activity {
+  Activity ||--o{ Media : associates
+  Activity }o--o{ Label : associates
+
+  User {
       int id PK
-      int user_id FK
-      int type
-      int status
-      string taks
-      json extra_data
-    }
+      string name
+      string mail
+  }
+  Activity {
+    int id PK
+    int user_id FK
+    int type
+    int status
+    string taks
+    json extra_data
+  }
+  
+  Label {
+    int id PK
+    string name
+    string description
+  }
+
+  Media {
+    int id PK
+    int activity_id FK
+    string type
+    string URI
+    string description
+    json extra_data
+  }
 ```
 
 ## Stack
