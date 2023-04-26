@@ -8,35 +8,61 @@
 erDiagram
   User ||--o{ Activity : creates
   Activity ||--o{ Media : associates
-  Activity }o--o{ Label : associates
+  Activity ||--o{ Label_Activity : associates
+  User ||--o{ Label: owns
+  Label ||--o{ Label_Activity : associates
 
-  User {
-      int id PK
-      string name
-      string mail
+  MUser {
+      bigint id PK
+      uuid public_id UK
+      text full_name
+      text mail
+      timestamptz created_at
+      timestamptz updated_at
   }
   Activity {
-    int id PK
-    int user_id FK
-    int type
-    int status
-    string taks
-    json extra_data
+    bigint id PK
+    uuid public_id UK
+    text name
+    text description
+    text type
+    text status
+    text state
+    text[] tags
+    jsonb extra_data
+    bigint muser_id FK
+    timestamptz created_at
+    timestamptz updated_at
   }
   
   Label {
-    int id PK
-    string name
-    string description
+    bigint id PK
+    uuid public_id UK
+    text name
+    text description
+    bigint muser_id FK
+    timestamptz created_at
+    timestamptz updated_at
   }
 
   Media {
-    int id PK
-    int activity_id FK
-    string type
-    string URI
-    string description
+    bigint id PK
+    uuid public_id UK
+    bigint activity_id FK
+    text name
+    text type
+    text uri
+    text description
     json extra_data
+    timestamptz created_at
+    timestamptz updated_at
+  }
+  Label_Activity {
+    bigint id PK
+    bigint label_id FK
+    bigint activity_id FK
+    timestamptz created_at
+    timestamptz updated_at
   }
 ```
 
