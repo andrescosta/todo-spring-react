@@ -6,10 +6,10 @@
 ## Datamodel
 ```mermaid
 erDiagram
-  User ||--o{ Activity : creates
+  MUser ||--o{ Activity : creates
   Activity ||--o{ Media : associates
   Activity ||--o{ Label_Activity : associates
-  User ||--o{ Label: owns
+  MUser ||--o{ Label: owns
   Label ||--o{ Label_Activity : associates
 
   MUser {
