@@ -1,15 +1,19 @@
 package todo;
 
+import static io.gatling.javaapi.core.CoreDsl.RawFileBody;
+import static io.gatling.javaapi.core.CoreDsl.atOnceUsers;
+import static io.gatling.javaapi.core.CoreDsl.jmesPath;
+import static io.gatling.javaapi.core.CoreDsl.jsonPath;
+import static io.gatling.javaapi.core.CoreDsl.scenario;
+import static io.gatling.javaapi.http.HttpDsl.http;
+import static io.gatling.javaapi.http.HttpDsl.status;
+
 import java.time.Duration;
-import java.util.*;
+import java.util.Map;
 
-import io.gatling.javaapi.core.*;
-import io.gatling.javaapi.http.*;
-import io.gatling.javaapi.jdbc.*;
-
-import static io.gatling.javaapi.core.CoreDsl.*;
-import static io.gatling.javaapi.http.HttpDsl.*;
-import static io.gatling.javaapi.jdbc.JdbcDsl.*;
+import io.gatling.javaapi.core.ScenarioBuilder;
+import io.gatling.javaapi.core.Simulation;
+import io.gatling.javaapi.http.HttpProtocolBuilder;
 
 public class RecordedSimulation extends Simulation {
 
@@ -49,7 +53,7 @@ public class RecordedSimulation extends Simulation {
     .pause(Duration.ofMillis(678))
     .exec(
       http("request_1")
-        .post("/activities")
+        .post("/v1/activities")
         .headers(headers_1)
         .body(RawFileBody("recordedsimulation/0001_request.json"))
         .check(status().is(200))
@@ -58,7 +62,7 @@ public class RecordedSimulation extends Simulation {
     )
     .exec(
       http("request_2")
-        .get("/activities")
+        .get("/v1/activities")
         .headers(headers_1)
         .check(status().is(200))
         .check(jmesPath("[?publicId=='${publicId}']"))

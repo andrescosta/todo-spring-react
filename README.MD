@@ -92,7 +92,8 @@ erDiagram
 ### API Documentation
 * Asciidoctor
 
-### Container
+### Infra
+* Nginx
 * Docker
 
 ### Testing

@@ -1,5 +1,5 @@
 import React from "react";
-import { useAuthContext } from "./AuthContextProvider";
+import { useAuthContext } from "../context/AuthContextProvider";
 
 export default function TopBar({ toggleMenu, menuShown }) {
   const authContext = useAuthContext();
