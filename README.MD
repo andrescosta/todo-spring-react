@@ -68,21 +68,26 @@ erDiagram
 
 ## Stack
 
-### Services
+### Activities Service
 * Java 19
 * Spring Boot
+* Spring RestDocs
+* Micrometer
+* Zipkin
+* Loki4j
+* Pyroscope
+* Slf4j 
 * Maven
+* GSon
+* JJWT
 
-### Authentication
+
+### Identity Management
 * KeyCloak (SSO)
   * OpenID Connect
 
 ### Database
 * Postgress
-
-#### Helpers
-* Error handling
-https://github.com/wimdeblauwe/error-handling-spring-boot-starter
 
 ## API Documentation
 * Asciidoctor
@@ -138,6 +143,11 @@ cd .\performance\gatling\
 .\mvnw gatling:test 
 ```
 
+* API Documentation
+```
+cd .\todo-svc
+.\mvnw package
+```
 
 ### Info
 * Home: http://localhost:3000/ 
@@ -152,7 +162,8 @@ cd .\performance\gatling\
   * User: admin/admin
 * PosgresSQL: localhost:5432
   * Database: todo
-
+* API Docs
+  * todo-svc\target\generated-docs\api-guide.html
 
 
 
