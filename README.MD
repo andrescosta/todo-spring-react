@@ -1,4 +1,4 @@
-# Project TODO App
+# Project: TODO App
 
 ## High level architecture
 ![Alt](docs/arch.drawio.png)
@@ -66,7 +66,7 @@ erDiagram
   }
 ```
 
-## Technologies
+## Stack
 
 ### Activity Service
 * Java 19
@@ -118,12 +118,12 @@ erDiagram
 
 ## Commands
 
-* Local Build
+* Build locally
 ```
 docker compose build
 ```
 
-* Full stack start  locally
+* Start the enviroment locally
 
 ```
 docker compose up -d
@@ -149,8 +149,8 @@ cd .\todo-svc
 .\mvnw package
 ```
 
-## Info
-> (local development environment)
+## Local environment
+
 * Home: http://localhost:3000/ 
   * User: test/123
 * Grafana: http://localhost:3030/
