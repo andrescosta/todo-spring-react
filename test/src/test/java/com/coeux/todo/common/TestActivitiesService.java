@@ -34,7 +34,7 @@ public class TestActivitiesService {
         String urlsvc = environment.getServiceHost("todosvc", 8080) + ":"
                 + environment.getServicePort("todosvc", 8080);
 
-        ServiceURI = URI.create("http://" + urlsvc + "/activities");
+        ServiceURI = URI.create("http://" + urlsvc + "/v1/activities");
     }
 
     @Test

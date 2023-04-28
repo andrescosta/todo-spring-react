@@ -17,6 +17,18 @@ volumes:
   tempo-data:
     driver: local
 services:
+  nginx:
+    image: coeux/rproxy:latest
+    build: ./nginx
+    ports:
+      - "8080:8080"
+      - "3000:3000"
+      - "8282:8282"
+    networks:
+      - backend
+    depends_on:
+      - todo-web
+      - todosvc 
   pyroscope:
     image: pyroscope/pyroscope:latest
     environment:
@@ -31,8 +43,8 @@ services:
   todo-web:
     image: coeux/todo-web:latest
     build: ./todo-web
-    ports:
-      - "3000:3000"
+    #ports:
+    #  - "3001:3001"
     networks:
       - backend
     depends_on:
@@ -47,8 +59,8 @@ services:
   todosvc:
     image: coeux/todo:latest
     build: ./todo-svc
-    ports:
-      - "8080:8080"
+    #ports:
+    #  - "8585:8585"
     environment:
       - SPRING_PROFILES_ACTIVE=devdocker
       - PYROSCOPE_APPLICATION_NAME=todo-svc-docker
@@ -101,6 +113,7 @@ services:
     volumes:
       - ./provisioning/keycloak/data:/opt/keycloak/data/import
     environment:
+      PROXY_ADDRESS_FORWARDING: true
       KC_DB: postgres
       KC_DB_URL_HOST: postgres-db
       KC_DB_URL_PORT: 5432
@@ -113,8 +126,8 @@ services:
       - start-dev
       - --import-realm
       - --metrics-enabled=true
-    ports:
-      - "8282:8080"
+    #ports:
+    #  - "8282:8080"
     networks:
       - backend
     depends_on:

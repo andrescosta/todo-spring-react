@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useActivitiesDispatch, Events } from "../context/ActivitiesContext"
+import { useActivitiesDispatch, Events } from "../activity/ActivitiesContext"
 import ActivityForm from "../activity/ActivityForm";
 import Modal from "../common/Modal"
 
