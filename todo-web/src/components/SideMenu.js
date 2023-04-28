@@ -1,5 +1,5 @@
 import React from "react"
-import { useAuthContext } from "./AuthContextProvider"
+import { useAuthContext } from "../context/AuthContextProvider"
 export default function SideMenu({menuShown}) {
     const authContext = useAuthContext();
     return menuShown ? (

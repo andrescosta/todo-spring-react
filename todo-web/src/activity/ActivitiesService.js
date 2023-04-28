@@ -1,4 +1,4 @@
-import { get, ddelete, post } from './RestUtil'
+import { get, ddelete, post } from '../common/RestUtil'
 
 
 export async function getActivities() {

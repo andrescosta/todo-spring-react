@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useAuthContext } from "./AuthContextProvider";
-import MainPanel from "./MainPanel";
-import SideMenu from "./SideMenu";
-import TopBar from "./TopBar";
-import LoadingSpinner from "./Spinner";
+import { useAuthContext } from "./context/AuthContextProvider";
+import MainPanel from "./components/MainPanel";
+import SideMenu from "./components/SideMenu";
+import TopBar from "./components/TopBar";
+import LoadingSpinner from "./common/Spinner";
 
 export default function TODOApp() {
   const authContext = useAuthContext();
