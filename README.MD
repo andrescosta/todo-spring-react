@@ -1,9 +1,9 @@
-# Project TODO
+# Project TODO App
 
-## Architecture
+## High level architecture
 ![Alt](docs/arch.drawio.png)
 
-## Datamodel
+## Data Model
 ```mermaid
 erDiagram
   MUser ||--o{ Activity : creates
@@ -66,7 +66,7 @@ erDiagram
   }
 ```
 
-## Stack
+## Technologies
 
 ### Activity Service
 * Java 19
@@ -118,25 +118,25 @@ erDiagram
 
 ## Commands
 
-* Build
+* Local Build
 ```
 docker compose build
 ```
 
-* Start:
+* Full stack start  locally
 
 ```
 docker compose up -d
 ```
 
-* Run integration tests:
+* Run integration tests locally:
 
 ```
 cd test
 .\mvnw surefire:test
 ```
 
-* Run performance tests:
+* Run performance tests locally:
 
 ```
 cd .\performance\gatling\
@@ -150,6 +150,7 @@ cd .\todo-svc
 ```
 
 ## Info
+> (local development environment)
 * Home: http://localhost:3000/ 
   * User: test/123
 * Grafana: http://localhost:3030/
@@ -164,7 +165,3 @@ cd .\todo-svc
   * Database: todo
 * API Docs
   * todo-svc\target\generated-docs\api-guide.html
-
-
-
-
