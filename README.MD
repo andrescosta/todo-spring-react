@@ -68,7 +68,7 @@ erDiagram
 
 ## Stack
 
-### Activities Service
+### Activity Service
 * Java 19
 * Spring Boot
 * Spring RestDocs
@@ -89,10 +89,10 @@ erDiagram
 ### Database
 * Postgress
 
-## API Documentation
+### API Documentation
 * Asciidoctor
 
-## Container
+### Container
 * Docker
 
 ### Testing
@@ -109,14 +109,14 @@ erDiagram
 * Pyroscope
 * Postgres-exporter
 
-## Web Client
+### Web Client
 * React
 * W3.CSS
 * Babel
 * Webpack
 * Axios
 
-### Commands
+## Commands
 
 * Build
 ```
@@ -149,7 +149,7 @@ cd .\todo-svc
 .\mvnw package
 ```
 
-### Info
+## Info
 * Home: http://localhost:3000/ 
   * User: test/123
 * Grafana: http://localhost:3030/
