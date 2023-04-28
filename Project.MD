@@ -1,7 +1,7 @@
 # Project TODO
 
 ## Architecture
-[TODO]
+![Alt](docs/arch.drawio.png)
 
 ## Datamodel
 ```mermaid

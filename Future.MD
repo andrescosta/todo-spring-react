@@ -19,6 +19,9 @@
 #### Docs
 https://www.youtube.com/watch?v=gIcHeE5z7Oc
 https://rockthejvm.com/p/typelevel-rite-of-passage
+https://www.youtube.com/watch?v=s2VgqF-aMPA
+https://gvolpe.com/slides/feda.html
+
 
 ### Zio
 
@@ -56,7 +59,9 @@ https://www.roc-lang.org/
 
 ## Elixir 
 https://twitter.com/elixirphoenix
-
+# Infra
+- kong
+- ngnix
 # Kubernetes
 ## Service mesh
 - Istio
