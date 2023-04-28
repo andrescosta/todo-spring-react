@@ -71,7 +71,7 @@ erDiagram
 * Java 19
 * Spring Boot
 ### Authentication
-* KeyCloak
+* KeyCloak (SSO)
   * OpenID Connect
 
 ### Database
@@ -82,9 +82,9 @@ erDiagram
 https://github.com/wimdeblauwe/error-handling-spring-boot-starter
 
 ### Testing
-* Junit 5
-* TestContainers 
-* Gatling
+* Junit 5 (Unit)
+* TestContainers (Integration) 
+* Gatling (Performance)
 
 
 ### Observability
@@ -103,4 +103,37 @@ https://github.com/wimdeblauwe/error-handling-spring-boot-starter
 * Asciidoctor
 
 ## Container
-- Docker
+* Docker
+
+## Test Instructions
+
+### Deployment
+
+docker compose up -d
+
+### Application 
+
+URL: http://localhost:3000/ 
+
+User: test/123
+
+### Grafana
+http://localhost:3030/
+
+#### Dashboards
+- JVM (Micrometer)
+- Logs, Traces, Metrics
+- PostgreSQL Database
+
+### Keycloak
+http://localhost:8282/admin/
+
+### PosgresSQL
+Host: localhost:5432
+
+Database: todo
+
+
+
+
+
