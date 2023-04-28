@@ -67,9 +67,12 @@ erDiagram
 ```
 
 ## Stack
+
 ### Services
 * Java 19
 * Spring Boot
+* Maven
+
 ### Authentication
 * KeyCloak (SSO)
   * OpenID Connect
@@ -81,11 +84,16 @@ erDiagram
 * Error handling
 https://github.com/wimdeblauwe/error-handling-spring-boot-starter
 
+## API Documentation
+* Asciidoctor
+
+## Container
+* Docker
+
 ### Testing
 * Junit 5 (Unit)
 * TestContainers (Integration) 
 * Gatling (Performance)
-
 
 ### Observability
 > (metrics, logs, traces, continuous profiling)
@@ -96,42 +104,54 @@ https://github.com/wimdeblauwe/error-handling-spring-boot-starter
 * Pyroscope
 * Postgres-exporter
 
-## Web
+## Web Client
 * React
+* W3.CSS
+* Babel
+* Webpack
+* Axios
 
-## Documentation:
-* Asciidoctor
+### Commands
 
-## Container
-* Docker
+* Build
+```
+docker compose build
+```
 
-## Test Instructions
+* Start:
 
-### Deployment
-
+```
 docker compose up -d
+```
 
-### Application 
+* Run integration tests:
 
-URL: http://localhost:3000/ 
+```
+cd test
+.\mvnw surefire:test
+```
 
-User: test/123
+* Run performance tests:
 
-### Grafana
-http://localhost:3030/
+```
+cd .\performance\gatling\
+.\mvnw gatling:test 
+```
 
-#### Dashboards
-- JVM (Micrometer)
-- Logs, Traces, Metrics
-- PostgreSQL Database
 
-### Keycloak
-http://localhost:8282/admin/
-
-### PosgresSQL
-Host: localhost:5432
-
-Database: todo
+### Info
+* Home: http://localhost:3000/ 
+  * User: test/123
+* Grafana: http://localhost:3030/
+  * User: admin/admin
+  * Dashboards:
+    * JVM (Micrometer)
+    * Logs, Traces, Metrics
+    * PostgreSQL Database
+* Keycloak: http://localhost:8282/admin/
+  * User: admin/admin
+* PosgresSQL: localhost:5432
+  * Database: todo
 
 
 
