@@ -1,6 +1,16 @@
 # Stacks
 
 ## Java
+### Spring boot
+#### Future improvements
+* Kafka and WebSockets
+* Nginx
+* JBang
+* Thymeleaf + HTMX
+* JDK FLight Recorder
+* JDK Mission Control
+* Visual VM 
+
 ### Quarkus
 ### Micronaut
 ### Helidon
