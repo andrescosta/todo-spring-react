@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { useActivitiesDispatch, Events } from "./ActivitiesContext"
-import { addActivity } from "./ActivitiesService"
-import ActivityForm from "./ActivityForm";
-import Modal from "./Modal"
+import { useActivitiesDispatch, Events } from "../context/ActivitiesContext"
+import ActivityForm from "../activity/ActivityForm";
+import Modal from "../common/Modal"
 
 
 export default function ToolBar() {

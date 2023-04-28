@@ -1,7 +1,7 @@
-import { ActivitiesProvider } from "./ActivitiesContext"
-import { Footer, Header } from "./CommonUI"
-import ToolBar from "./ToolBar"
-import ActivityPanel from "./ActivityPanel"
+import { ActivitiesProvider } from "../context/ActivitiesContext"
+import { Footer, Header } from "../components/CommonUI"
+import ToolBar from "../components/ToolBar"
+import ActivityPanel from "../components/ActivityPanel"
 import React from "react"
 export default function MainPanel() {
   return (<>

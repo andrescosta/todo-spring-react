@@ -1,4 +1,4 @@
-import styles from "./App.css";
+import styles from "../App.css";
 import React from "react";
 export default function LoadingSpinner() {
 
