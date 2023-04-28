@@ -1,0 +1,1 @@
+.\mvnw gatling:test

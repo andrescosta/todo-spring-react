@@ -22,8 +22,6 @@ import jakarta.servlet.http.HttpServletRequest;
 */
 public class JwtTokenAuthenticationFilter extends GenericFilterBean {
 
-    public static final String HEADER_PREFIX = "Bearer ";
-
     private JwtTokenAuthenticationProvider jwtTokenProvider = null;
 
     public JwtTokenAuthenticationFilter(JwtTokenAuthenticationProvider tokenProvider) {
@@ -33,9 +31,9 @@ public class JwtTokenAuthenticationFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain filterChain)
             throws IOException, ServletException {
-        if (isAuthTokenPresent((HttpServletRequest) req)) {
-            String token = getAuthToken((HttpServletRequest) req);
-            if (jwtTokenProvider.validateToken(token)) {
+        if (jwtTokenProvider.isAuthTokenPresent((HttpServletRequest) req)) {
+            String token = jwtTokenProvider.getAuthToken((HttpServletRequest) req);
+            if (jwtTokenProvider.validateRequestToken(token)) {
                 Authentication auth = jwtTokenProvider.getAuthentication(token);
                 SecurityContext context = SecurityContextHolder.createEmptyContext();
                 context.setAuthentication(auth);
@@ -44,15 +42,4 @@ public class JwtTokenAuthenticationFilter extends GenericFilterBean {
         }
         filterChain.doFilter(req, res);
     }
-
-    private String getAuthToken(HttpServletRequest request) {
-        String bearerToken = request.getHeader(HttpHeaders.AUTHORIZATION);
-        return bearerToken.substring(7);
-    }
-
-    private boolean isAuthTokenPresent(HttpServletRequest request) {
-        String bearerToken = request.getHeader(HttpHeaders.AUTHORIZATION);
-        return StringUtils.hasText(bearerToken) && bearerToken.startsWith(HEADER_PREFIX);
-    }
-
 }

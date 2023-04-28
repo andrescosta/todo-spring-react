@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.coeux.todo.entities.Activity;
-import com.coeux.todo.entities.ActivityType;
 import com.coeux.todo.services.ActivityService;
 
 import io.micrometer.observation.annotation.Observed;
@@ -34,35 +33,34 @@ public class ActivityController {
     final private static Logger log = LoggerFactory.getLogger(ActivityController.class);
 
     @GetMapping
-    @Observed(name = "user.activities", contextualName = "getting-user-activities", lowCardinalityKeyValues = {
-            "userType", "userType2" })
-    //TODO: remove userType
+    @Observed(name = "get.user.activities", contextualName = "getting-user-activities" )
     public List<Activity> getActivities(Principal principal) {
-        UsernamePasswordAuthenticationToken principal1 = (UsernamePasswordAuthenticationToken) principal;
-        UUID publicId = UUID.fromString(((User) principal1.getPrincipal()).getUsername());
+        UUID publicId = getMUserPublicId(principal);
         return service.getActivitiesByMUser(publicId);
     }
 
     @GetMapping("/users/{publicId}?type={type}")
-    public List<Activity> getActivitiesByType(@PathVariable UUID publicId, @PathVariable String type) {
-        return service.getActivitiesByType(publicId, ActivityType.valueOf(type));
+    public List<Activity> getActivitiesByType(Principal principal, @PathVariable UUID publicId,
+            @PathVariable String type) {
+        return null; //service.getActivitiesByType(publicId, ActivityType.valueOf(type));
     }
 
     @GetMapping("/{publicId}")
-    public Activity getActivity(@PathVariable UUID publicId) {
-        return service.getActivityByPublicId(publicId);
+    @Observed(name = "get.one.user.activity", contextualName = "getting-one-activity")
+    public Activity getActivity(Principal principal, @PathVariable UUID publicId) {
+        UUID muserpublicId = getMUserPublicId(principal);
+        return service.getActivityByPublicId(muserpublicId, publicId);
     }
 
     @PostMapping
-    @Observed(name = "user.activities", contextualName = "new-user-activity", lowCardinalityKeyValues = {
-        "userType", "userType2" })
-    //TODO: remove userType
+    @Observed(name = "new.user.activities", contextualName = "new-user-activity", lowCardinalityKeyValues = {
+            "userType", "userType2" })
     public Activity postActivity(Principal principal, @RequestBody Activity activity) {
         log.debug("Activity:" + activity);
-        UsernamePasswordAuthenticationToken principal1 = (UsernamePasswordAuthenticationToken) principal;
-        UUID publicId = UUID.fromString(((User) principal1.getPrincipal()).getUsername());
+        UUID publicId = getMUserPublicId(principal);
 
-        return service.saveActivity(publicId, activity);
+        var newactivity = service.saveActivity(publicId, activity);
+        return newactivity;
     }
 
     @PatchMapping("/{publicId}")
@@ -71,12 +69,17 @@ public class ActivityController {
     }
 
     @DeleteMapping("/{publicId}")
-    @Observed(name = "user.activities", contextualName = "del-user-activity", lowCardinalityKeyValues = {
-        "userType", "userType2" })
-    //TODO: remove userType
-    public void deleteActivity(@PathVariable UUID publicId) {
+    @Observed(name = "delete.user.activities", contextualName = "del-user-activity")
+    public void deleteActivity(Principal principal, @PathVariable UUID publicId) {
         log.debug("Deleting id:" + publicId);
-        service.deleteActivity(publicId);
+        UUID muserPublicId = getMUserPublicId(principal);
+        service.deleteActivity(muserPublicId, publicId);
+    }
+
+    private UUID getMUserPublicId(Principal principal) {
+        UsernamePasswordAuthenticationToken principal1 = (UsernamePasswordAuthenticationToken) principal;
+        UUID muserPublicId = UUID.fromString(((User) principal1.getPrincipal()).getUsername());
+        return muserPublicId;
     }
 
 }

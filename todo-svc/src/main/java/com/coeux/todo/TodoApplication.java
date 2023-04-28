@@ -8,7 +8,6 @@ public class TodoApplication {
 
 	
 	public static void main(String[] args) {
-		System.out.println("starting ...");
 		SpringApplication.run(TodoApplication.class, args);
 	}
 
