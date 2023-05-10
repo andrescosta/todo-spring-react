@@ -35,20 +35,22 @@ https://gvolpe.com/slides/feda.html
 
 ### Zio
 
-### Go
+## Go
 
-### Rust
+## Rust
 
-### Clojure
+## Clojure
 
-### Kotlin
+## Kotlin
 
-### Typescript
+## Typescript
 
-### .NET
+## .NET
 - Dapr (F#/C#)
 
-### WebAssembly
+## WebAssembly
+
+## Unison
 
 #### Docs
  https://github.com/louthy/language-ext https://github.com/la-yumba/functional-csharp-code https://github.com/la-yumba/functional-csharp-code-2
