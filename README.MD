@@ -117,40 +117,40 @@ erDiagram
 * Webpack
 * Axios
 
-## Commands
+## Local Test
 
-* Build locally
+* Building 
 ```
 docker compose build
 ```
 
-* Start the enviroment locally
+* Starting the enviroment 
 
 ```
 docker compose up -d
 ```
 
-* Run integration tests locally:
+* Runing integration tests
 
 ```
 cd test
 .\mvnw surefire:test
 ```
 
-* Run performance tests locally:
+* Runing performance tests
 
 ```
 cd .\performance\gatling\
 .\mvnw gatling:test 
 ```
 
-* API Documentation
+* Generating the API Documentation
 ```
 cd .\todo-svc
 .\mvnw package
 ```
 
-## Local environment
+## Local environment information
 
 * Home: http://localhost:3000/ 
   * User: test/123
