@@ -1,0 +1,280 @@
+{
+  "id": "1f1d83a5-a784-466e-b3ef-ac84e522b06b",
+  "version": "2.0",
+  "name": "todo",
+  "url": "http://localhost:3000",
+  "tests": [{
+    "id": "a1f05bd2-b491-416e-8a41-c66cad54ed1f",
+    "name": "new_user",
+    "commands": [{
+      "id": "9e12e396-4ba8-4db8-ab2b-5ea1d8698d3e",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8282/realms/my-todo-app/protocol/openid-connect/auth?client_id=my-todo-app-web-client&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&state=2976ecf5-b6b2-4db4-8727-6b33458e7899&response_mode=fragment&response_type=code&scope=openid&nonce=417a2201-ec2c-4ffd-8102-325e4b07a555",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a5512ccc-b81f-4d00-ae59-72d94917906b",
+      "comment": "",
+      "command": "executeScript",
+      "target": "return Math.random(). toString(36).substring(2,12)",
+      "targets": [],
+      "value": "user"
+    }, {
+      "id": "5f0b4348-1c17-4f8e-ae93-43bdb628b129",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1296x816",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3be29aff-5e5a-4624-b52b-f58d266e773e",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Register",
+      "targets": [
+        ["linkText=Register", "linkText"],
+        ["css=span > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Register')]", "xpath:link"],
+        ["xpath=//div[@id='kc-registration']/span/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/realms/my-todo-app/login-actions/registration?client_id=my-todo-app-web-client&tab_id=HGq3hk1QECo')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Register')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "06f3590a-0d5a-467c-8912-337deb2a2a68",
+      "comment": "",
+      "command": "click",
+      "target": "id=firstName",
+      "targets": [
+        ["id=firstName", "id"],
+        ["name=firstName", "name"],
+        ["css=#firstName", "css:finder"],
+        ["xpath=//input[@id='firstName']", "xpath:attributes"],
+        ["xpath=//form[@id='kc-register-form']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6e3d18f0-2475-4df3-b3bb-c4e29f92af97",
+      "comment": "",
+      "command": "type",
+      "target": "id=firstName",
+      "targets": [
+        ["id=firstName", "id"],
+        ["name=firstName", "name"],
+        ["css=#firstName", "css:finder"],
+        ["xpath=//input[@id='firstName']", "xpath:attributes"],
+        ["xpath=//form[@id='kc-register-form']/div/div[2]/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "${user}"
+    }, {
+      "id": "8eb019f8-6bc5-4bb1-81fe-0187750e331a",
+      "comment": "",
+      "command": "type",
+      "target": "id=lastName",
+      "targets": [
+        ["id=lastName", "id"],
+        ["name=lastName", "name"],
+        ["css=#lastName", "css:finder"],
+        ["xpath=//input[@id='lastName']", "xpath:attributes"],
+        ["xpath=//form[@id='kc-register-form']/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": "user"
+    }, {
+      "id": "4a271ba5-dafc-484e-ac97-07d4f9c6c817",
+      "comment": "",
+      "command": "type",
+      "target": "id=username",
+      "targets": [
+        ["id=username", "id"],
+        ["name=username", "name"],
+        ["css=#username", "css:finder"],
+        ["xpath=//input[@id='username']", "xpath:attributes"],
+        ["xpath=//form[@id='kc-register-form']/div[4]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[4]/div[2]/input", "xpath:position"]
+      ],
+      "value": "${user}"
+    }, {
+      "id": "8fcd0148-d8ea-41bc-8ec2-d4ac941f150a",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//form[@id='kc-register-form']/div[5]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[5]/div[2]/input", "xpath:position"]
+      ],
+      "value": "123"
+    }, {
+      "id": "95a901e7-0861-457f-9de4-810bc72ebc5f",
+      "comment": "",
+      "command": "type",
+      "target": "id=password-confirm",
+      "targets": [
+        ["id=password-confirm", "id"],
+        ["name=password-confirm", "name"],
+        ["css=#password-confirm", "css:finder"],
+        ["xpath=//input[@id='password-confirm']", "xpath:attributes"],
+        ["xpath=//form[@id='kc-register-form']/div[6]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[6]/div[2]/input", "xpath:position"]
+      ],
+      "value": "123"
+    }, {
+      "id": "033cde57-b549-43fa-822e-b6c6f3c4e906",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='kc-register-form']/div[3]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "45b2044f-3654-4d6f-a439-4677c1c1fafe",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["name=email", "name"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//form[@id='kc-register-form']/div[3]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/input", "xpath:position"]
+      ],
+      "value": "${user}@s.com"
+    }, {
+      "id": "8b2f4ce6-3aa0-4d4d-af51-c9afa68fc01d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.pf-c-button",
+      "targets": [
+        ["css=.pf-c-button", "css:finder"],
+        ["xpath=//input[@value='Register']", "xpath:attributes"],
+        ["xpath=//div[@id='kc-form-buttons']/input", "xpath:idRelative"],
+        ["xpath=//div[7]/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b1f5eca2-ae75-4280-be32-7a30036c2125",
+      "comment": "",
+      "command": "click",
+      "target": "css=.fa-plus",
+      "targets": [
+        ["css=.fa-plus", "css:finder"],
+        ["xpath=//div[@id='root']/div[3]/div/a[7]/i", "xpath:idRelative"],
+        ["xpath=//a[7]/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "41e462da-123e-4272-aaa3-d0addcfd986a",
+      "comment": "",
+      "command": "click",
+      "target": "name=name",
+      "targets": [
+        ["name=name", "name"],
+        ["css=p:nth-child(3) > .w3-input", "css:finder"],
+        ["xpath=//input[@name='name']", "xpath:attributes"],
+        ["xpath=//div[@id='modalBook']/div/form/p[2]/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c748acc9-d7dc-4f07-b279-f7e82464adc4",
+      "comment": "",
+      "command": "type",
+      "target": "name=name",
+      "targets": [
+        ["name=name", "name"],
+        ["css=p:nth-child(3) > .w3-input", "css:finder"],
+        ["xpath=//input[@name='name']", "xpath:attributes"],
+        ["xpath=//div[@id='modalBook']/div/form/p[2]/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "ole.com"
+    }, {
+      "id": "a24aedda-4e95-4945-b204-95d2e4579497",
+      "comment": "",
+      "command": "type",
+      "target": "name=description",
+      "targets": [
+        ["name=description", "name"],
+        ["css=p:nth-child(4) > .w3-input", "css:finder"],
+        ["xpath=//input[@name='description']", "xpath:attributes"],
+        ["xpath=//div[@id='modalBook']/div/form/p[3]/input", "xpath:idRelative"],
+        ["xpath=//p[3]/input", "xpath:position"]
+      ],
+      "value": "Futbol"
+    }, {
+      "id": "119f76d1-bbe5-4582-af4a-fa59840a435f",
+      "comment": "",
+      "command": "type",
+      "target": "name=link",
+      "targets": [
+        ["name=link", "name"],
+        ["css=p:nth-child(5) > .w3-input", "css:finder"],
+        ["xpath=//input[@name='link']", "xpath:attributes"],
+        ["xpath=//div[@id='modalBook']/div/form/p[4]/input", "xpath:idRelative"],
+        ["xpath=//p[4]/input", "xpath:position"]
+      ],
+      "value": "ole.com"
+    }, {
+      "id": "15004a7d-5aa5-4b65-a0e3-ba771ed809d2",
+      "comment": "",
+      "command": "type",
+      "target": "name=tags",
+      "targets": [
+        ["name=tags", "name"],
+        ["css=p:nth-child(6) > .w3-input", "css:finder"],
+        ["xpath=//input[@name='tags']", "xpath:attributes"],
+        ["xpath=//div[@id='modalBook']/div/form/p[5]/input", "xpath:idRelative"],
+        ["xpath=//p[5]/input", "xpath:position"]
+      ],
+      "value": "futbol;news"
+    }, {
+      "id": "5505e74b-3044-4e71-a930-929e1429a678",
+      "comment": "",
+      "command": "click",
+      "target": "css=.w3-btn",
+      "targets": [
+        ["css=.w3-btn", "css:finder"],
+        ["xpath=//div[@id='modalBook']/div/form/p[6]/button", "xpath:idRelative"],
+        ["xpath=//p[6]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Add')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6dfc25c2-4a76-4380-96f5-756938bd8365",
+      "comment": "",
+      "command": "click",
+      "target": "css=.fa-user-circle-o",
+      "targets": [
+        ["css=.fa-user-circle-o", "css:finder"],
+        ["xpath=//div[@id='root']/div/button[2]/i", "xpath:idRelative"],
+        ["xpath=//button[2]/i", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "13e21d1f-5111-4169-a96e-9ab0e1cfb912",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://localhost:8282/", "http://localhost:3000/"],
+  "plugins": []
+}

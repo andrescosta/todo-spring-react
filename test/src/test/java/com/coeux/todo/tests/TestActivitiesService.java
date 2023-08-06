@@ -1,4 +1,4 @@
-package com.coeux.todo.common;
+package com.coeux.todo.tests;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;

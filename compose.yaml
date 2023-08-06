@@ -113,7 +113,7 @@ services:
     volumes:
       - ./provisioning/keycloak/data:/opt/keycloak/data/import
     environment:
-      PROXY_ADDRESS_FORWARDING: true
+      PROXY_ADDRESS_FORWARDING: 'true'
       KC_DB: postgres
       KC_DB_URL_HOST: postgres-db
       KC_DB_URL_PORT: 5432
