@@ -20,5 +20,20 @@
 			}
 		],
 		"java.configuration.runtimes": []
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"type": "java",
+				"name": "TodoApplication",
+				"request": "launch",
+				"mainClass": "com.coeux.todo.TodoApplication",
+				"projectName": "todo-svc",
+				"env": {
+					"SPRING_PROFILES_ACTIVE":"local"
+				}
+			}
+		]
 	}
 }
