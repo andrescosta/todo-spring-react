@@ -8,8 +8,20 @@ import (
 
 	"github.com/andrescosta/todo-spring-react/todo-improver/internal/activity"
 	"github.com/andrescosta/todo-spring-react/todo-improver/internal/config"
-	"github.com/andrescosta/todo-spring-react/todo-improver/internal/summary"
+	"github.com/andrescosta/todo-spring-react/todo-improver/internal/workers"
 )
+
+/*
+Pipele:
+
+                         +--> Worker 1: Get Title
+                         |                    |             Merger Errors results
+                         |                    +--------->
+Producer: Get Activities |
+                         |                     +-------->   Merger Success results
+                         |                     |
+                         +--> Worker 2: Get Summary
+*/
 
 func main() {
 	ctx, done := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
@@ -46,9 +58,9 @@ func producer(ctx context.Context, ticker *time.Ticker) error {
 				println(err.Error())
 			} else {
 				for _, v := range a {
-					err := summary.Fillsummary(v.URI)
+					err := workers.GetTitleWorker(ctx, v, manager)
 					if err != nil {
-						println("error:", err)
+						println(err.Error())
 					}
 				}
 			}

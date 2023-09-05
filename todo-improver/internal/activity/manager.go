@@ -11,6 +11,7 @@ import (
 
 type Manager interface {
 	GetActivities(ctx context.Context, when time.Time) ([]model.Activity, error)
+	UpdateActivity(ctx context.Context, activity model.Activity) error
 	Close()
 }
 
@@ -42,5 +43,9 @@ func (m MyManager) GetActivities(ctx context.Context, when time.Time) ([]model.A
 	} else {
 		return act, err
 	}
+}
 
+func (m MyManager) UpdateActivity(ctx context.Context, activity model.Activity) error {
+	err := m.repo.UpdateActivity(ctx, activity)
+	return err
 }
