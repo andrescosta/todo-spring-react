@@ -57,6 +57,8 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
         name text,
         description text,
         TYPE text NOT NULL,
+		title text,
+		summary text,
         state text NOT NULL,
         STATUS text NOT NULL,
         tags text [],
