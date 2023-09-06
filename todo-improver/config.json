@@ -1,0 +1,5 @@
+{
+    "dbdsn":"host=localhost port=5432 user=todo_user password=mysecretpassword dbname=todo sslmode=disable",
+    "timeout":100,
+    "pollfreq":4000
+}

@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"sqltools.connections": [
+			{
+				"previewLimit": 50,
+				"server": "localhost",
+				"port": 5432,
+				"driver": "PostgreSQL",
+				"name": "localhost",
+				"database": "todo",
+				"username": "todo_user",
+				"password": "mysecretpassword"
+			}
+		]
+	}
+}
