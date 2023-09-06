@@ -1,4 +1,4 @@
-package model
+package activity
 
 import "database/sql"
 

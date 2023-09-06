@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"database/sql"
-	"fmt"
 	"os/signal"
 	"sync"
 	"syscall"
@@ -12,41 +11,57 @@ import (
 	"github.com/andrescosta/todo-spring-react/todo-improver/internal/activity"
 	"github.com/andrescosta/todo-spring-react/todo-improver/internal/config"
 	"github.com/andrescosta/todo-spring-react/todo-improver/internal/workers"
+	"github.com/andrescosta/todo-spring-react/todo-improver/pkg/logging"
 )
 
 /*
 
-                         +--> Worker 1: Get Title
-                         |                    |             Merger Errors results
-                         |                    +--------->
-Producer: Get Activities |
-                         |                     +-------->   Merger Success results
-                         |                     |
-                         +--> Worker 2: Get Summary
+                         +--> Worker 1..n: Get Title
+                         |                     |            ------------------------------
+                         |                     +--------->  |            Errors results  |
+Producer: Get Activities |                                  | Consumer:                  |
+                         |                     +--------->  |            Success results |
+                         |                     |            ------------------------------
+                         +--> Worker 1..n: Get Summary
 */
 
 func main() {
 	ctx, done := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
-	println("Starting ...")
-	var wgProcess sync.WaitGroup
-	wgProcess.Add(1)
-	go start(ctx, &wgProcess)
-	select {
-	case <-ctx.Done():
+	ctx = logging.WithLogger(ctx)
+	logger := logging.FromContext(ctx)
+	defer func() {
 		done()
+		if r := recover(); r != nil {
+			logger.Fatalw("application panic", "panic", r)
+		}
+	}()
+	config, err := config.GetConfig()
+	if err != nil {
+		logger.Error("Config not found.")
+		return
 	}
-	wgProcess.Wait()
-	println("Stopped")
+	logger.Info("Starting ...")
+	doStart(ctx, config)
+	done()
+	logger.Info("Stopped")
 }
 
-func start(ctx context.Context, wgProcess *sync.WaitGroup) error {
+func doStart(ctx context.Context, config *config.ImproverConfig) {
+	logger := logging.FromContext(ctx)
+	var wgProcess sync.WaitGroup
+	wgProcess.Add(1)
+	go start(ctx, &wgProcess, config)
+	logger.Info("Started ...")
+	wgProcess.Wait()
+}
+
+func start(ctx context.Context, wgProcess *sync.WaitGroup, config *config.ImproverConfig) {
+	logger := logging.FromContext(ctx)
+	defer wgProcess.Done()
 	ticker := time.NewTicker(10000 * time.Millisecond)
-	config := config.ImproverConfig{
-		DBURL: "postgres://todo_user:mysecretpassword@localhost:5432/todo",
-	}
-	manager, err := activity.NewManager(ctx, &config)
+	manager, err := activity.NewManager(ctx, config)
 	if err != nil {
-		return err
+		logger.Error(err)
 	}
 	defer manager.Close()
 
@@ -62,33 +77,34 @@ func start(ctx context.Context, wgProcess *sync.WaitGroup) error {
 	wgSummaryWorker.Add(numWorkers)
 
 	for i := 0; i < numWorkers; i++ {
-		go func() {
+		go func(id int) {
+			defer wgTitleWorker.Done()
 			workers.GetTitleWorker(ctx, titleChan, errChan, titleResChan)
-			wgTitleWorker.Done()
-			println("Done title")
-		}()
-		go func() {
+			logger.Debugf("Title Worker %d stopped.", id)
+		}(i)
+		go func(id int) {
+			defer wgSummaryWorker.Done()
 			workers.GetSummaryWorker(ctx, summaryChan, errChan, summaryResChan)
-			wgSummaryWorker.Done()
-			println("Done summary")
-		}()
+			logger.Debugf("Summary Worker %d stopped.", id)
+		}(i)
 	}
 
 	wgConsumer.Add(1)
 	go func() {
+		defer wgConsumer.Done()
 		for {
 			select {
 			case rt := <-titleResChan:
-				fmt.Printf("Title for %d\n", rt.Activity.Id)
+				logger.Debugf("Title for %d", rt.Activity.Id)
 				rt.Activity.Title = sql.NullString{
 					String: rt.Title,
 					Valid:  true,
 				}
 				err = manager.UpdateActivity(ctx, rt.Activity)
 				if err != nil {
-					println(err.Error())
+					logger.Error(err.Error())
 				}
-				fmt.Printf("Title done for %d\n", rt.Activity.Id)
+				logger.Debugf("Title done for %d", rt.Activity.Id)
 			case rs := <-summaryResChan:
 				rs.Activity.Summary = sql.NullString{
 					String: rs.Summary,
@@ -96,14 +112,13 @@ func start(ctx context.Context, wgProcess *sync.WaitGroup) error {
 				}
 				err = manager.UpdateActivity(ctx, rs.Activity)
 				if err != nil {
-					println(err.Error())
+					logger.Error(err.Error())
 				}
-				fmt.Printf("Summary done for %d\n", rs.Activity.Id)
+				logger.Debugf("Summary done for %d", rs.Activity.Id)
 			case er := <-errChan:
-				println(er.Activity.Id, er.Err.Error())
+				logger.Errorf("Error processing activity: %d %s", er.Activity.Id, er.Err.Error())
 			case <-ctx.Done():
-				wgConsumer.Done()
-				println("Done consumers")
+				logger.Debug("Done consumers")
 				return
 			}
 		}
@@ -111,35 +126,31 @@ func start(ctx context.Context, wgProcess *sync.WaitGroup) error {
 
 	wgProducer.Add(1)
 	go func() {
-	loop:
+		defer ticker.Stop()
+		defer wgProducer.Done()
 		for {
 			select {
 			case <-ticker.C:
 				if a, err := manager.GetActivities(ctx, time.Now()); err != nil {
-					println(err.Error())
+					logger.Error(err.Error())
 				} else {
 					for _, v := range a {
-						fmt.Printf("Adding activity %d\n", v.Id)
+						logger.Debugf("Adding activity %d", v.Id)
 						select {
 						case titleChan <- v:
-							fmt.Printf("Added title activity %d\n", v.Id)
+							logger.Debugf("Added title activity %d", v.Id)
 						case summaryChan <- v:
-							fmt.Printf("Added summary activity %d\n", v.Id)
+							logger.Debugf("Added summary activity %d", v.Id)
 						case <-ctx.Done():
-							break loop
+							return
 						}
-						fmt.Printf("Done Adding activity %d\n", v.Id)
+						logger.Debugf("Done Adding activity %d", v.Id)
 					}
 				}
 			case <-ctx.Done():
-				break loop
+				return
 			}
 		}
-		ticker.Stop()
-		println("Done ticker")
-		wgProducer.Done()
-		return
-
 	}()
 
 	wgProducer.Wait()
@@ -151,7 +162,6 @@ func start(ctx context.Context, wgProcess *sync.WaitGroup) error {
 	close(errChan)
 	close(summaryChan)
 	close(titleChan)
-	wgProcess.Done()
-	println("done process")
-	return nil
+	logger.Debugf("done process")
+	return
 }

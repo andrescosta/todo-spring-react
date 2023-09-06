@@ -1,4 +1,4 @@
-package repository
+package activity
 
 import (
 	"context"
@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/andrescosta/todo-spring-react/todo-improver/internal/activity/model"
 	"github.com/andrescosta/todo-spring-react/todo-improver/internal/config"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
@@ -17,7 +16,7 @@ type ActivityRepository struct {
 }
 
 func NewActivityRepositoy(ctx context.Context, conf *config.ImproverConfig) (*ActivityRepository, error) {
-	pgxConfig, err := pgxpool.ParseConfig(conf.DBURL)
+	pgxConfig, err := pgxpool.ParseConfig(conf.DBDSN)
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse connection string: %w", err)
 	}
@@ -37,7 +36,7 @@ func (a *ActivityRepository) Close() {
 	a.pool.Close()
 }
 
-func (a *ActivityRepository) GetActivities(ctx context.Context, when time.Time) ([]model.Activity, error) {
+func (a *ActivityRepository) GetActivities(ctx context.Context, when time.Time) ([]Activity, error) {
 	conn, err := a.pool.Acquire(ctx)
 	if err != nil {
 		return nil, err
@@ -79,12 +78,12 @@ func (a *ActivityRepository) GetActivities(ctx context.Context, when time.Time) 
 
 	defer rows.Close()
 
-	var activities []model.Activity
+	var activities []Activity
 	for rows.Next() {
 		if err := rows.Err(); err != nil {
 			return nil, err
 		}
-		var activity model.Activity
+		var activity Activity
 		if err := rows.Scan(&activity.Id, &activity.Name, &activity.Title,
 			&activity.Summary, &activity.URI); err != nil {
 			return nil, err
@@ -95,7 +94,7 @@ func (a *ActivityRepository) GetActivities(ctx context.Context, when time.Time) 
 	return activities, nil
 }
 
-func (a *ActivityRepository) UpdateActivity(ctx context.Context, activity model.Activity) error {
+func (a *ActivityRepository) UpdateActivity(ctx context.Context, activity Activity) error {
 	conn, err := a.pool.Acquire(ctx)
 	if err != nil {
 		return err
