@@ -2,7 +2,6 @@ package config
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 )
 
@@ -13,14 +12,9 @@ type ImproverConfig struct {
 }
 
 func GetConfig() (*ImproverConfig, error) {
-	if host, ok := os.LookupEnv("APP_DB_HOST"); ok {
-		port := os.Getenv("APP_DB_PORT")
-		user := os.Getenv("APP_DB_USER")
-		pwd := os.Getenv("APP_DB_PWD")
-		db := os.Getenv("APP_DB_DB")
-		url := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", host, port, user, pwd, db)
+	if dsn, ok := os.LookupEnv("postgress_dsn"); ok {
 		return &ImproverConfig{
-			DBDSN: url,
+			DBDSN: dsn,
 		}, nil
 	} else {
 		return getFromFile()

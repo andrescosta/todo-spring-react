@@ -1,0 +1,28 @@
+# Use the official Go image as the base image
+FROM golang:1.21-alpine AS builder
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the source code into the container
+COPY . .
+
+RUN go mod tidy
+
+# Build the Go application
+RUN CGO_ENABLED=0 GOOS=linux go build -o improver ./cmd
+
+# Use a minimal Alpine image as the base image for the final container
+FROM alpine:latest
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the built binary from the previous stage
+COPY --from=builder /app/improver .
+
+# Expose the port that the application listens on
+#ENV postgress_dsn="host=host.docker.internal user=todo_user password=mysecretpassword dbname=todo sslmode=disable"
+
+# Run the Go application
+CMD ["sh","-c", "./improver"]

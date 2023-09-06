@@ -17,6 +17,7 @@ type ActivityRepository struct {
 
 func NewActivityRepositoy(ctx context.Context, conf *config.ImproverConfig) (*ActivityRepository, error) {
 	pgxConfig, err := pgxpool.ParseConfig(conf.DBDSN)
+	println(conf.DBDSN)
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse connection string: %w", err)
 	}
