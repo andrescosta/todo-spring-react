@@ -57,7 +57,7 @@ func start(ctx context.Context, wgProcess *sync.WaitGroup) error {
 	errChan := make(chan workers.WorkerError)
 
 	var wgTitleWorker, wgSummaryWorker, wgConsumer, wgProducer sync.WaitGroup
-	const numWorkers = 1
+	const numWorkers = 3
 	wgTitleWorker.Add(numWorkers)
 	wgSummaryWorker.Add(numWorkers)
 
@@ -111,6 +111,7 @@ func start(ctx context.Context, wgProcess *sync.WaitGroup) error {
 
 	wgProducer.Add(1)
 	go func() {
+	loop:
 		for {
 			select {
 			case <-ticker.C:
@@ -125,17 +126,20 @@ func start(ctx context.Context, wgProcess *sync.WaitGroup) error {
 						case summaryChan <- v:
 							fmt.Printf("Added summary activity %d\n", v.Id)
 						case <-ctx.Done():
-							return
+							break loop
 						}
+						fmt.Printf("Done Adding activity %d\n", v.Id)
 					}
 				}
 			case <-ctx.Done():
-				ticker.Stop()
-				println("Done ticker")
-				wgProducer.Done()
-				return
+				break loop
 			}
 		}
+		ticker.Stop()
+		println("Done ticker")
+		wgProducer.Done()
+		return
+
 	}()
 
 	wgProducer.Wait()
