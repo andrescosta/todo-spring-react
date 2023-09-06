@@ -70,6 +70,7 @@ erDiagram
 
 ### Activity Service
 * Java 19
+* Go (Improver job service)
 * Spring Boot
 * Spring RestDocs
 * Micrometer
