@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f compose.yml
+    kompose.version: 1.30.0 (9d8dcb518)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: loki
+  name: loki
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: loki
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f compose.yml
+        kompose.version: 1.30.0 (9d8dcb518)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/app: "true"
+        io.kompose.service: loki
+    spec:
+      containers:
+        - args:
+            - -config.file=/etc/loki-local-config.yaml
+          env:
+            - name: JAEGER_AGENT_HOST
+              value: tempo
+            - name: JAEGER_ENDPOINT
+              value: http://tempo:14268/api/traces
+            - name: JAEGER_SAMPLER_PARAM
+              value: "1"
+            - name: JAEGER_SAMPLER_TYPE
+              value: const
+          image: grafana/loki
+          name: loki
+          ports:
+            - containerPort: 3100
+              hostPort: 3100
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+            - mountPath: /etc/loki-local-config.yaml
+              name: loki-config
+              subPath: loki-local-config.yaml
+      restartPolicy: Always
+      volumes:
+        - name: loki-config
+          configMap:
+              defaultMode: 420
+              name: loki-config
+status: {}

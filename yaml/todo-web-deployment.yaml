@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f compose.yml
+    kompose.version: 1.30.0 (9d8dcb518)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: todo-web
+  name: todo-web
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: todo-web
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f compose.yml
+        kompose.version: 1.30.0 (9d8dcb518)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/app: "true"
+        io.kompose.service: todo-web
+    spec:
+      containers:
+        - image: coeux/todo-web:latest
+          livenessProbe:
+            exec:
+              command:
+                - curl -f http://localhost:3000/ || exit 1
+            failureThreshold: 2
+            periodSeconds: 60
+            timeoutSeconds: 10
+          name: todo-web
+          resources: {}
+      restartPolicy: Always
+status: {}

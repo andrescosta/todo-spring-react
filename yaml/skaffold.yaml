@@ -1,0 +1,53 @@
+apiVersion: skaffold/v4beta7
+kind: Config
+metadata:
+  name: todo-spring-react
+build:
+  local:
+    concurrency: 1
+    tryImportMissing: false
+    useDockerCLI: false
+    useBuildkit: true
+  artifacts:
+    - image: coeux/rproxy
+      context: nginx
+      docker:
+        dockerfile: Dockerfile
+    - image: coeux/todo
+      context: todo-svc
+      docker:
+        dockerfile: Dockerfile
+    - image: coeux/todo-web
+      context: todo-web
+      docker:
+        dockerfile: Dockerfile
+manifests:
+  rawYaml:
+    - grafana-claim1-persistentvolumeclaim.yaml
+    - grafana-data-persistentvolumeclaim.yaml
+    - grafana-deployment.yaml
+    - grafana-service.yaml
+    - keycloak-claim0-persistentvolumeclaim.yaml
+    - keycloak-deployment.yaml
+    - loki-claim0-persistentvolumeclaim.yaml
+    - loki-deployment.yaml
+    - loki-service.yaml
+    - nginx-deployment.yaml
+    - nginx-service.yaml
+    - postgres-data-persistentvolumeclaim.yaml
+    - postgres-db-claim1-persistentvolumeclaim.yaml
+    - postgres-db-deployment.yaml
+    - postgres-db-service.yaml
+    - postgres-exporter-deployment.yaml
+    - postgres-exporter-service.yaml
+    - prometheus-claim0-persistentvolumeclaim.yaml
+    - prometheus-deployment.yaml
+    - prometheus-service.yaml
+    - pyroscope-deployment.yaml
+    - pyroscope-service.yaml
+    - tempo-claim0-persistentvolumeclaim.yaml
+    - tempo-claim1-persistentvolumeclaim.yaml
+    - tempo-deployment.yaml
+    - tempo-service.yaml
+    - todo-web-deployment.yaml
+    - todosvc-deployment.yaml

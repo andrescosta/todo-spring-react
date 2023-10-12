@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f compose.yml
+    kompose.version: 1.30.0 (9d8dcb518)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: keycloak
+  name: keycloak
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: keycloak
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f compose.yml
+        kompose.version: 1.30.0 (9d8dcb518)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/app: "true"
+        io.kompose.service: keycloak
+    spec:
+      containers:
+        - args:
+            - start-dev
+            - --import-realm
+            - --metrics-enabled=true
+          env:
+            - name: KC_DB
+              value: postgres
+            - name: KC_DB_PASSWORD
+              value: keycloak123
+            - name: KC_DB_SCHEMA
+              value: public
+            - name: KC_DB_URL_DATABASE
+              value: keycloak
+            - name: KC_DB_URL_HOST
+              value: postgres-db
+            - name: KC_DB_URL_PORT
+              value: "5432"
+            - name: KC_DB_USERNAME
+              value: keycloak
+            - name: KEYCLOAK_ADMIN
+              value: admin
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              value: admin
+            - name: KEYCLOAK_FRONTEND_URL
+              value: http://localhost:8282/auth
+            - name: PROXY_ADDRESS_FORWARDING
+              value: "true"
+          image: quay.io/keycloak/keycloak:latest
+          name: keycloak
+          resources: {}
+          volumeMounts:
+            - mountPath: /opt/keycloak/data/import/src/database
+              name: keycloak-database
+            - mountPath: /opt/keycloak/data/import/data
+              name: keycloak-data
+      restartPolicy: Always
+      volumes:
+        - name: keycloak-database
+          configMap:
+            defaultMode: 420
+            name: keycloak-database
+        - name: keycloak-data
+          configMap:
+            defaultMode: 420
+            name: keycloak-data
+status: {}

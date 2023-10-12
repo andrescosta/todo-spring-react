@@ -17,15 +17,6 @@ volumes:
   tempo-data:
     driver: local
 services:
-  improver:
-    image: coeux/improver:latest
-    build: ./todo-improver
-    networks:
-      - backend
-    environment:
-      postgress_dsn: host=postgres-db user=todo_user password=mysecretpassword dbname=todo sslmode=disable
-    depends_on:
-      - postgres-db
   nginx:
     image: coeux/rproxy:latest
     build: ./nginx

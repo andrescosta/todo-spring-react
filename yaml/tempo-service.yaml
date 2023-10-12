@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f compose.yml
+    kompose.version: 1.30.0 (9d8dcb518)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: tempo
+  name: tempo
+  namespace: default
+spec:
+  ports:
+    - name: "14268"
+      port: 14268
+      targetPort: 14268
+    - name: "9411"
+      port: 9411
+      targetPort: 9411
+  selector:
+    io.kompose.service: tempo
+status:
+  loadBalancer: {}

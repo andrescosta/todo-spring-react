@@ -19,7 +19,7 @@ public class TestApp {
     public static DockerComposeContainer<?> environment = new DockerComposeContainer<>(
             new File("../compose.yaml")).withLocalCompose(true)
                     .withExposedService("keycloak", 8080)
-                    .withExposedService("todosvc", 8080);
+                    x.withExposedService("todosvc", 8080);
 
     static URI KeyCloakURI = null;
     static URI ServiceURI = null;
