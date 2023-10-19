@@ -31,6 +31,7 @@ spec:
             - start-dev
             - --import-realm
             - --metrics-enabled=true
+            - --http-port 8282
           env:
             - name: KC_DB
               value: postgres
@@ -51,16 +52,26 @@ spec:
             - name: KEYCLOAK_ADMIN_PASSWORD
               value: admin
             - name: KEYCLOAK_FRONTEND_URL
-              value: http://localhost:8282/auth
+              value: https://keycloak/auth
             - name: PROXY_ADDRESS_FORWARDING
               value: "true"
+            - name: KEYCLOAK_HTTP_PORT
+              value: "80"
+            - name: KEYCLOAK_HTTPS_PORT
+              value: "443"
+            - name: KEYCLOAK_HOSTNAME
+              value: keycloak
+            - name: KC_PROXY
+              value: "edge"
           image: quay.io/keycloak/keycloak:latest
           name: keycloak
+          ports:
+            - containerPort: 8282
+              hostPort: 8282
+              protocol: TCP
           resources: {}
           volumeMounts:
-            - mountPath: /opt/keycloak/data/import/src/database
-              name: keycloak-database
-            - mountPath: /opt/keycloak/data/import/data
+            - mountPath: /opt/keycloak/data/import
               name: keycloak-data
       restartPolicy: Always
       volumes:

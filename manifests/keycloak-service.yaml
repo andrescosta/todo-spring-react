@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: C:\Users\Andres\AppData\Local\Microsoft\WinGet\Links\kompose.exe convert -f ..\compose.yml
+    kompose.version: 1.30.0 (9d8dcb518)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: keycloak
+  name: keycloak
+  namespace: default
+spec:
+  ports:
+    - name: "8282"
+      port: 8282
+      targetPort: 8282
+  selector:
+    io.kompose.service: keycloak
+  type: LoadBalancer
+status:
+  loadBalancer: {}

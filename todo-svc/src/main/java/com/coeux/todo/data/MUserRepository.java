@@ -38,12 +38,10 @@ public class MUserRepository {
 
         var keys = keyHolder.getKeys();
 
-        if (keys == null || keys.size() == 0) {
+        if (keys == null || keys.isEmpty()) {
             throw new Error("keys map is empty");
         }
-        MUser user2 = new MUser((long) keys.get("id"), (UUID) keys.get("public_id"), user.name(), user.email(), null,
-                null);
-        return user2;
+        return user.withIDs((long) keys.get("id"), (UUID) keys.get("public_id"));
     }
 
     public MUser getOrAddMUser(UUID publicId) {

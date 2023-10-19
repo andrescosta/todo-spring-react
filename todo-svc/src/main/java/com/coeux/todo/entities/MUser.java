@@ -13,4 +13,9 @@ public record MUser(@JsonIgnore long id, UUID publicId, String name, String emai
     public MUser(UUID publicId) {
         this(0, publicId, null, null, null, null);
     }
+
+    public MUser withIDs(long id, UUID publicId){
+        return new MUser(id, publicId, this.name(), this.email(), null,
+        null);
+    }
 }

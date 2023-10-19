@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert -f compose.yml
+    kompose.cmd: C:\Users\Andres\AppData\Local\Microsoft\WinGet\Links\kompose.exe convert -f ..\compose.yml
     kompose.version: 1.30.0 (9d8dcb518)
   creationTimestamp: null
   labels:
@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose convert -f compose.yml
+        kompose.cmd: C:\Users\Andres\AppData\Local\Microsoft\WinGet\Links\kompose.exe convert -f ..\compose.yml
         kompose.version: 1.30.0 (9d8dcb518)
       creationTimestamp: null
       labels:
@@ -48,14 +48,18 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: devdocker
           image: coeux/todo:latest
-          livenessProbe:
-            exec:
-              command:
-                - curl -f http://localhost:8080/activities || exit 1
-            failureThreshold: 2
-            periodSeconds: 60
-            timeoutSeconds: 10
+          #livenessProbe:
+          #  exec:
+          #    command:
+          #      - curl -f http://localhost:8080/activities || exit 1
+          #  failureThreshold: 2
+          #  periodSeconds: 60
+          #  timeoutSeconds: 10
           name: todosvc
+          ports:
+            - containerPort: 8080
+              hostPort: 8080
+              protocol: TCP
           resources: {}
       restartPolicy: Always
 status: {}

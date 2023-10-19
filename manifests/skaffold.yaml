@@ -9,31 +9,37 @@ build:
     useDockerCLI: false
     useBuildkit: true
   artifacts:
-    - image: coeux/rproxy
-      context: nginx
-      docker:
-        dockerfile: Dockerfile
     - image: coeux/todo
-      context: todo-svc
+      context: ../todo-svc
       docker:
         dockerfile: Dockerfile
     - image: coeux/todo-web
-      context: todo-web
+      context: ../todo-web
       docker:
         dockerfile: Dockerfile
 manifests:
   rawYaml:
+    - todosvc-certificate.yaml
+    - todoweb-certificate.yaml
+    - keycloak-certificate.yaml
+    - db-sh-configmap.yaml
+    - grafana-dashboards-configmap.yaml
+    - grafana-datasources-configmap.yaml
+    - keycloak-data-configmap.yaml
+    - keycloak-database-configmap.yaml
+    - loki-config-configmap.yaml
+    - prometheus-yml-configmap.yaml
+    - tempo-yml-configmap.yaml
     - grafana-claim1-persistentvolumeclaim.yaml
     - grafana-data-persistentvolumeclaim.yaml
     - grafana-deployment.yaml
     - grafana-service.yaml
     - keycloak-claim0-persistentvolumeclaim.yaml
     - keycloak-deployment.yaml
+    - keycloak-service.yaml
     - loki-claim0-persistentvolumeclaim.yaml
     - loki-deployment.yaml
     - loki-service.yaml
-    - nginx-deployment.yaml
-    - nginx-service.yaml
     - postgres-data-persistentvolumeclaim.yaml
     - postgres-db-claim1-persistentvolumeclaim.yaml
     - postgres-db-deployment.yaml
@@ -50,4 +56,9 @@ manifests:
     - tempo-deployment.yaml
     - tempo-service.yaml
     - todo-web-deployment.yaml
+    - todo-web-service.yaml
+    - todo-web-ingress.yaml
     - todosvc-deployment.yaml
+    - todosvc-service.yaml
+    - keycloak-ingress.yaml
+    - todosvc-ingress.yaml

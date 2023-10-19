@@ -1,6 +1,6 @@
 {
   "realm": "my-todo-app",
-  "auth-server-url": "http://localhost:8282/",
+  "auth-server-url": "https://keycloak/",
   "ssl-required": "none",
   "resource": "my-todo-app-web-client",
   "public-client": true,

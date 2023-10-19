@@ -69,7 +69,7 @@ public class LabelRepository {
         if (keys == null || keys.isEmpty()) {
             throw new Error();
         }
-        return new Label((long) keys.get("id"), (UUID) keys.get("public_id"), label.name(), label.description(), null);
+        return label.withIDs((long) keys.get("id"), (UUID) keys.get("public_id"));
     }
 
     public class LabelRowMapper implements RowMapper<Label> {

@@ -47,13 +47,13 @@ spec:
             - name: POSTGRES_USER
               value: postgres
           image: postgres:15
-          livenessProbe:
-            exec:
-              command:
-                - pg_isready -U postgres
-            failureThreshold: 2
-            periodSeconds: 60
-            timeoutSeconds: 10
+          #livenessProbe:
+          #  exec:
+          #    command:
+          #      - pg_isready -U postgres
+          #  failureThreshold: 2
+          #  periodSeconds: 60
+          #  timeoutSeconds: 10
           name: postgres-db
           ports:
             - containerPort: 5432

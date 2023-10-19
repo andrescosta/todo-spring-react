@@ -12,5 +12,10 @@ public record Media(
         MediaType type, URI uri, @JsonIgnore ExtraInfo extraInfo,
         Map<String, Object> extraData) {
 
+                public Media withIDs(long id, UUID publicId){
+                        return new Media(id, publicId, this.name(), this.description(),
+                        this.type(), this.uri(), null, this.extraData());
+                }
+
 
 }

@@ -2,25 +2,20 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    kompose.cmd: kompose convert -f compose.yml
+    kompose.cmd: C:\Users\Andres\AppData\Local\Microsoft\WinGet\Links\kompose.exe convert -f ..\compose.yml
     kompose.version: 1.30.0 (9d8dcb518)
   creationTimestamp: null
   labels:
-    io.kompose.service: nginx
-  name: nginx
+    io.kompose.service: todosvc
+  name: todosvc
   namespace: default
 spec:
   ports:
     - name: "8080"
       port: 8080
       targetPort: 8080
-    - name: "3000"
-      port: 3000
-      targetPort: 3000
-    - name: "8282"
-      port: 8282
-      targetPort: 8282
   selector:
-    io.kompose.service: nginx
+    io.kompose.service: todosvc
+  type: LoadBalancer
 status:
   loadBalancer: {}

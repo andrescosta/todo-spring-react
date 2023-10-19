@@ -43,8 +43,8 @@ services:
   todo-web:
     image: coeux/todo-web:latest
     build: ./todo-web
-    #ports:
-    #  - "3001:3001"
+    ports:
+      - "3001:3001"
     networks:
       - backend
     depends_on:
@@ -59,8 +59,8 @@ services:
   todosvc:
     image: coeux/todo:latest
     build: ./todo-svc
-    #ports:
-    #  - "8585:8585"
+    ports:
+      - "8585:8585"
     environment:
       - SPRING_PROFILES_ACTIVE=devdocker
       - PYROSCOPE_APPLICATION_NAME=todo-svc-docker
@@ -126,8 +126,8 @@ services:
       - start-dev
       - --import-realm
       - --metrics-enabled=true
-    #ports:
-    #  - "8282:8080"
+    ports:
+      - "8282:8080"
     networks:
       - backend
     depends_on:

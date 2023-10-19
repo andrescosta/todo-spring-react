@@ -121,13 +121,9 @@ public class ActivityRepository {
             labelRepository.associateLabels(id, activity.labels());
         }
 
-        return new Activity(id, (UUID) keys.get("public_id"), activity.name(), activity.description(), null,
-                activity.type(), activity.state(), activity.status(),
-                activity.tags(), newMedia, activity.labels(), activity.extraData());
+        return activity.withIDsAndMedia(id, (UUID) keys.get("public_id"), newMedia);
     }
 
-  
-   
     public class ActivityRowMapper implements RowMapper<Activity> {
         @Override
         public Activity mapRow(ResultSet rs, int rowNum) throws SQLException {
