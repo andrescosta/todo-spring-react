@@ -17,11 +17,10 @@
             ]
         },
         {
-            "type": "java",
+            "type": "jdk",
             "name": "TodoApplication",
             "request": "launch",
             "mainClass": "com.coeux.todo.TodoApplication",
-            "projectName": "todo",
             "env": {
                 "SPRING_PROFILES_ACTIVE": "local"
             }
