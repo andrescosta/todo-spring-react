@@ -37,15 +37,6 @@ public class ActivityRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    @Autowired
-    MUserRepository muserRepository;
-
-    @Autowired
-    LabelRepository labelRepository;
-
-    @Autowired 
-    MediaRepository mediaRepository;
-
     JsonParser parser;
 
     static private final Logger logger = LoggerFactory.getLogger(ActivityRepository.class);
@@ -113,15 +104,8 @@ public class ActivityRepository {
             throw new Error();
         }
         var id = (long) keys.get("id");
-        Media[] newMedia = null;
-        if (activity.media() != null) {
-            newMedia = mediaRepository.saveMedia(id, activity.media());
-        }
-        if (activity.labels() != null) {
-            labelRepository.associateLabels(id, activity.labels());
-        }
 
-        return activity.withIDsAndMedia(id, (UUID) keys.get("public_id"), newMedia);
+        return activity.withIDs(id, (UUID) keys.get("public_id"));
     }
 
     public class ActivityRowMapper implements RowMapper<Activity> {
@@ -137,8 +121,8 @@ public class ActivityRepository {
                     ActivityState.valueOf(rs.getString("ac_state")),
                     ActivityStatus.valueOf(rs.getString("ac_status")),
                     (String[]) rs.getArray("ac_tags").getArray(),
-                    mediaRepository.getMediaByActivity(rs.getLong("ac_id")).toArray(Media[]::new),
-                    labelRepository.getLabelsByActivity(rs.getLong("ac_id")).toArray(Label[]::new),
+                    null,
+                    null,
                     parse(rs.getString("ac_extra_data")));
 
             return activity;

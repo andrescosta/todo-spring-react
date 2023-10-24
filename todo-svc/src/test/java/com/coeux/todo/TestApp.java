@@ -34,7 +34,7 @@ public class TestApp {
     @Container
     static PostgreSQLContainer<?> postgresContainer = new PostgreSQLContainer<>("postgres:15")
     .withDatabaseName("todo")
-    .withClasspathResourceMapping("todo-db", "/docker-entrypoint-initdb.d/", BindMode.READ_ONLY);
+    .withClasspathResourceMapping("/todo-db/", "/docker-entrypoint-initdb.d/", BindMode.READ_ONLY);
 
     @Container
     static KeycloakContainer keycloak = new KeycloakContainer()
