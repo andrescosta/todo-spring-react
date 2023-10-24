@@ -1,50 +1,65 @@
-package com.coeux.todo.tests;
+package com.coeux.todo;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.containsString;
-import java.io.File;
 import java.net.URI;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeAll;
+
+import static org.hamcrest.Matchers.containsString;
 import org.junit.jupiter.api.Test;
-import org.testcontainers.containers.DockerComposeContainer;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
+import org.testcontainers.containers.BindMode;
+import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+
+import dasniko.testcontainers.keycloak.KeycloakContainer;
+import static io.restassured.RestAssured.given;
 import io.restassured.http.ContentType;
 
 @Testcontainers
+@SpringBootTest(
+    classes = TodoApplication.class,
+    webEnvironment = WebEnvironment.RANDOM_PORT
+)
+@ActiveProfiles("test")
 public class TestActivitiesService {
 
+    @LocalServerPort
+	private int port;
+    
     @Container
-    public static DockerComposeContainer<?> environment = new DockerComposeContainer<>(
-            new File("../compose.yaml")).withLocalCompose(true)
-                    .withExposedService("keycloak", 8080).withExposedService("todosvc", 8080);
+    static PostgreSQLContainer<?> postgresContainer = new PostgreSQLContainer<>("postgres:15")
+    .withDatabaseName("todo")
+    .withClasspathResourceMapping("provisioning/todo-db", "/docker-entrypoint-initdb.d/", BindMode.READ_ONLY);
 
-    static URI KeyCloakURI = null;
-    static URI ServiceURI = null;
+    @Container
+    static KeycloakContainer keycloak = new KeycloakContainer()
+        .withEnv("DB_VENDOR", "h2")
+        .withRealmImportFile("realm-export.json");
 
-    @BeforeAll
-    public static void setProperties() {
-        String url = environment.getServiceHost("keycloak", 8080) +
-                ":"
-                + environment.getServicePort("keycloak", 8080);
-        KeyCloakURI =
-                URI.create("http://" + url + "/realms/my-todo-app/protocol/openid-connect/token");
-
-        String urlsvc = environment.getServiceHost("todosvc", 8080) + ":"
-                + environment.getServicePort("todosvc", 8080);
-
-        ServiceURI = URI.create("http://" + urlsvc + "/v1/activities");
+    @DynamicPropertySource
+    private static void setDatasourceProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.datasource.url", postgresContainer::getJdbcUrl);
+        registry.add("spring.datasource.password", postgresContainer::getPassword);
+        registry.add("spring.datasource.username", postgresContainer::getUsername);
+        registry.add("jwt.jwksURI", ()->keycloak.getAuthServerUrl() + "/realms/my-todo-app/protocol/openid-connect/certs");
     }
 
     @Test
     void givenAuthenticatedUser_whenGetActivities_shouldReturnActivities() {
-        var tok = assertToken();
-        assertPostActivity(tok);
-        assetGetActivities(tok);
+        var serviceURI = URI.create("http://localhost:"+port+"/v1/activities");
+        var keyCloakURI = URI.create(keycloak.getAuthServerUrl() + "/realms/my-todo-app/protocol/openid-connect/token");
+        var tok = assertToken(keyCloakURI);
+
+        assertPostActivity(tok, serviceURI);
+        assetGetActivities(tok, serviceURI);
     }
 
-    public String assertToken() {
+    public String assertToken(URI keyCloakURI) {
 
         var formData = Map.of(
                 "grant_type", "password",
@@ -53,23 +68,21 @@ public class TestActivitiesService {
                 "password", "123");
 
         var token = given()
-                //.proxy("127.0.0.1", 8000)
                 .formParams(formData)
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .expect()
                 .statusCode(200)
                 .body(containsString("access_token"))
                 .when()
-                .post(KeyCloakURI)
+                .post(keyCloakURI)
                 .jsonPath()
                 .get("access_token");
 
         return "Bearer " + token;
     }
 
-    public void assertPostActivity(String tok) {
+    public void assertPostActivity(String tok, URI serviceURI) {
         given()
-                //.proxy("127.0.0.1", 8000)
                 .body(BODY_ACT)
                 .header("content-type", "application/json")
                 .header("Authorization", tok)
@@ -77,19 +90,18 @@ public class TestActivitiesService {
                 .statusCode(200)
                 .contentType(ContentType.JSON)
                 .when()
-                .post(ServiceURI);
+                .post(serviceURI);
     }
 
-    public void assetGetActivities(String tok) {
+    public void assetGetActivities(String tok, URI serviceURI) {
         given()
-                //.proxy("127.0.0.1", 8000)
                 .header("content-type", "application/json")
                 .header("Authorization", tok)
                 .expect()
                 .statusCode(200)
                 .contentType(ContentType.JSON)
                 .when()
-                .get(ServiceURI);
+                .get(serviceURI);
     }
 
     private static String BODY_ACT = """

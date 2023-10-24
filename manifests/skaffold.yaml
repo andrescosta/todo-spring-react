@@ -32,8 +32,10 @@ manifests:
     - tempo-yml-configmap.yaml
     - grafana-claim1-persistentvolumeclaim.yaml
     - grafana-data-persistentvolumeclaim.yaml
+    - grafana-certificate.yaml
     - grafana-deployment.yaml
     - grafana-service.yaml
+    - grafana-ingress.yaml
     - keycloak-claim0-persistentvolumeclaim.yaml
     - keycloak-deployment.yaml
     - keycloak-service.yaml

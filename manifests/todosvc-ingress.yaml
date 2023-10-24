@@ -6,7 +6,7 @@ spec:
   tls:
     - hosts:
         - todosvc
-      secretName: todosvc
+      secretName: todosvc-cert
   rules:
     - host: todosvc
       http:

@@ -5,7 +5,7 @@ data:
 kind: Secret
 metadata:
   creationTimestamp: "2023-10-19T20:43:56Z"
-  name: todosvc
+  name: todosvc-cert
   namespace: default
   resourceVersion: "8113"
   uid: 2f295c93-a472-4f74-a588-cd536a760560

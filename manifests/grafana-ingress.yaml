@@ -1,20 +1,20 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: todoweb
+  name: grafana
 spec:
   tls:
     - hosts:
-        - todoweb
-      secretName: todoweb-cert
+        - grafana
+      secretName: grafana-cert
   rules:
-    - host: todoweb
+    - host: grafana
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: todoweb
+                name: grafana
                 port:
-                  number: 3000
+                  number: 3030

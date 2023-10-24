@@ -37,6 +37,9 @@ spec:
             - containerPort: 9411
               hostPort: 9411
               protocol: TCP
+            - containerPort: 3200
+              hostPort: 3200
+              protocol: TCP
           resources: {}
           volumeMounts:
             - name: tempo-yml

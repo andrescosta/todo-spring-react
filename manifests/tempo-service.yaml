@@ -17,6 +17,9 @@ spec:
     - name: "9411"
       port: 9411
       targetPort: 9411
+    - name: "3200"
+      port: 3200
+      targetPort: 3200
   selector:
     io.kompose.service: tempo
 status:
