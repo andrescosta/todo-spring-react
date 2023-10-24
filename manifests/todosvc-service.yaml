@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: C:\Users\Andres\AppData\Local\Microsoft\WinGet\Links\kompose.exe convert -f ..\compose.yml
+    kompose.version: 1.30.0 (9d8dcb518)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: todosvc
+  name: todosvc
+  namespace: default
+spec:
+  ports:
+    - name: "8080"
+      port: 8080
+      targetPort: 8080
+  selector:
+    io.kompose.service: todosvc
+  type: LoadBalancer
+status:
+  loadBalancer: {}

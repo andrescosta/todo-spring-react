@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f compose.yml
+    kompose.version: 1.30.0 (9d8dcb518)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: postgres-exporter
+  name: postgres-exporter
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: postgres-exporter
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f compose.yml
+        kompose.version: 1.30.0 (9d8dcb518)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/app: "true"
+        io.kompose.service: postgres-exporter
+    spec:
+      containers:
+        - env:
+            - name: DATA_SOURCE_NAME
+              value: postgresql://postgres:mysecretpassword@postgres-db:5432/postgres?sslmode=disable
+          image: quay.io/prometheuscommunity/postgres-exporter
+          name: postgres-exporter
+          ports:
+            - containerPort: 9187
+              hostPort: 9187
+              protocol: TCP
+          resources: {}
+      restartPolicy: Always
+status: {}

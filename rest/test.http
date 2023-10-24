@@ -1,0 +1,72 @@
+
+GET http://localhost:8080/activities/b0fd1de6-0bca-4cd0-8c8f-36d3997cbb5b HTTP/1.1
+content-type: application/json
+###
+GET http://localhost:8080/activities/users/64241a52-5881-4607-8e89-200451e707c3 HTTP/1.1
+content-type: application/json
+###
+
+POST https://todosvc/v1/musers HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJqYkRYUUphckltZ29mQ2RabDBUZnJCdUtCNnlqb1h2R0NWRU42amdnR3hBIn0.eyJleHAiOjE2OTc0MTkwNzQsImlhdCI6MTY5NzQxODc3NCwiYXV0aF90aW1lIjoxNjk3NDE4NzY2LCJqdGkiOiJiOGZiYTE4MS00MjYwLTQ3MjktYjQ1YS02ODY4YTMwNDU3YjkiLCJpc3MiOiJodHRwczovL2tleWNsb2FrL3JlYWxtcy9teS10b2RvLWFwcCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiIwZTIwYTAxZS0xZjY4LTQyODYtOTRmMi01MGI5Nzk1MGIwZGIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJteS10b2RvLWFwcC13ZWItY2xpZW50Iiwibm9uY2UiOiJiMDY2ZjEzZS04N2Q1LTQ0YWEtOTQ5My1kZGMyYjU3NTRiYTciLCJzZXNzaW9uX3N0YXRlIjoiNzMxMTkwODctMWJlNS00MjQxLTgwNDItYTNiMzA2M2I1NTljIiwiYWNyIjoiMCIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwIl0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwic2lkIjoiNzMxMTkwODctMWJlNS00MjQxLTgwNDItYTNiMzA2M2I1NTljIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiVXNlciBUZXN0IiwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdCIsImdpdmVuX25hbWUiOiJVc2VyIiwiZmFtaWx5X25hbWUiOiJUZXN0IiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIn0.bqzyNMgE-eSU9KkTQleCZKpPYK2v2aMbiVCG5c0f--qChZAh1CKWG84KojwPXgWjXaDkmIZZtjpldTkFUCxwFJH9stl7MwZryKpvcb2oLT7tMPTstPLD9IeQdWUqLAeeaWC_Xdj52wsjxjV8QSUMDRWjX9dL7wjd5f-Xb5DpyJtWjp2HEO5jIUgG6Rc70uC9ok4JRom2Y3NAZx0L2AmsEuuIY-r57l7qxTFausy2Gcur36l06V_4emp2rYdKDClTQuIJJrIVC5h5dp0UzURZ66fJCef_t7hOe4jhHy5b_Ew4t9U7XhgpnM33JjTLyl7SUn5gcdMUU_sOjnvgX_6P8Q
+content-type: application/json
+
+{
+    "name":"name1",
+    "email":"email1"
+}
+###
+
+POST http://172.29.135.252:30532/v1/activities HTTP/1.1
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJqYkRYUUphckltZ29mQ2RabDBUZnJCdUtCNnlqb1h2R0NWRU42amdnR3hBIn0.eyJleHAiOjE2OTc0MTkwNzQsImlhdCI6MTY5NzQxODc3NCwiYXV0aF90aW1lIjoxNjk3NDE4NzY2LCJqdGkiOiJiOGZiYTE4MS00MjYwLTQ3MjktYjQ1YS02ODY4YTMwNDU3YjkiLCJpc3MiOiJodHRwczovL2tleWNsb2FrL3JlYWxtcy9teS10b2RvLWFwcCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiIwZTIwYTAxZS0xZjY4LTQyODYtOTRmMi01MGI5Nzk1MGIwZGIiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJteS10b2RvLWFwcC13ZWItY2xpZW50Iiwibm9uY2UiOiJiMDY2ZjEzZS04N2Q1LTQ0YWEtOTQ5My1kZGMyYjU3NTRiYTciLCJzZXNzaW9uX3N0YXRlIjoiNzMxMTkwODctMWJlNS00MjQxLTgwNDItYTNiMzA2M2I1NTljIiwiYWNyIjoiMCIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwIl0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwic2lkIjoiNzMxMTkwODctMWJlNS00MjQxLTgwNDItYTNiMzA2M2I1NTljIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiVXNlciBUZXN0IiwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdCIsImdpdmVuX25hbWUiOiJVc2VyIiwiZmFtaWx5X25hbWUiOiJUZXN0IiwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIn0.bqzyNMgE-eSU9KkTQleCZKpPYK2v2aMbiVCG5c0f--qChZAh1CKWG84KojwPXgWjXaDkmIZZtjpldTkFUCxwFJH9stl7MwZryKpvcb2oLT7tMPTstPLD9IeQdWUqLAeeaWC_Xdj52wsjxjV8QSUMDRWjX9dL7wjd5f-Xb5DpyJtWjp2HEO5jIUgG6Rc70uC9ok4JRom2Y3NAZx0L2AmsEuuIY-r57l7qxTFausy2Gcur36l06V_4emp2rYdKDClTQuIJJrIVC5h5dp0UzURZ66fJCef_t7hOe4jhHy5b_Ew4t9U7XhgpnM33JjTLyl7SUn5gcdMUU_sOjnvgX_6P8Q
+content-type: application/json
+
+{
+    "name":"act2",
+    "description":"act 2 act 1",
+    "type":0,
+    "state":0,
+    "status":0,
+    "tags":["t1","t2"],
+    "extraData": {
+        "uno":"1",
+        "dos":2
+    },
+    "muser": {
+        "id":3
+    },
+    "labels":[
+        {
+            "publicId":"77fd98c3-b5d5-42f2-b4b9-85742cdb8c1b"
+        }
+    ],
+    "media":[
+        {
+            "name":"media1",
+            "description":"media1",
+            "type":"IMAGE",
+            "uri":"http://www.a.com/j.jpg",
+            "extraData": {
+                "uno":"1",
+                "dos":2
+            }
+        }
+    ]
+}
+
+###
+
+POST http://localhost:8080/labels HTTP/1.1
+content-type: application/json
+
+{
+    "name":"lbl1",
+    "description":"lbl 1 lbl 1",
+    "muser": {
+        "id":1
+    }
+}
+
+###
+GET http://localhost:8080/labels/users/672d2e23-b824-41ca-97b0-6efe2d589842 HTTP/1.1
+content-type: application/json
+

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const svc = "http://localhost:8080/";
+const svc = "https://todosvc/";
 
 export async function get({ api, pathParams, queryParams }) {
   try {

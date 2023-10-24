@@ -26,7 +26,7 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.SigningKeyResolver;
 import io.jsonwebtoken.io.Decoders;
 
-// With the help of: https://github.com/okta/okta-jwt-verifier-java/blob/master/impl/src/main/java/com/okta/jwt/impl/jjwt/RemoteJwkSigningKeyResolver.java
+// With help of: https://github.com/okta/okta-jwt-verifier-java/blob/master/impl/src/main/java/com/okta/jwt/impl/jjwt/RemoteJwkSigningKeyResolver.java
 public final class RemoteJwkSigningKeyResolver implements SigningKeyResolver {
 
     private final URI jwkUri;

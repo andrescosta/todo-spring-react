@@ -1,0 +1,20 @@
+apiVersion: v1
+data:
+  prometheus.yml: "global:\r\n  scrape_interval:     15s # Default scrape interval\r\n\r\nscrape_configs:\r\n
+    \ - job_name: 'prometheus' # Job to scrape Prometheus metrics\r\n    scrape_interval:
+    5s\r\n    static_configs:\r\n      - targets: ['localhost:9090']\r\n\r\n  - job_name:
+    'todosvc-metrics'\r\n    metrics_path: '/actuator/prometheus' # Job to scrape
+    TODO Svc metrics\r\n    scrape_interval: 5s\r\n    static_configs:\r\n      -
+    targets: ['todosvc:8080','todosvc:6543']\r\n\r\n  - job_name: 'keycloak-metrics'\r\n
+    \   metrics_path: '/metrics' # Job to scrape keycloak(authn/authz) metrics\r\n
+    \   scrape_interval: 5s\r\n    static_configs:\r\n      - targets: ['keycloak:8080']\r\n
+    \ \r\n  - job_name: 'postgresql-metrics'\r\n    metrics_path: '/metrics' # Job
+    to scrape posgresql metrics\r\n    scrape_interval: 5s\r\n    static_configs:\r\n
+    \     - targets: ['postgres-exporter:9187']"
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2023-10-11T16:43:40Z"
+  name: prometheus-yml
+  namespace: default
+  resourceVersion: "24254"
+  uid: 3593112e-d8ca-42cd-befa-3457acfc567f

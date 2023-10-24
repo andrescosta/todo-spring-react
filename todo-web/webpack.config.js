@@ -34,10 +34,14 @@ module.exports = {
             directory: path.join(__dirname, "public/")
         },
         port: 3000,
+        allowedHosts: [
+            'todoweb',
+        ],
         devMiddleware: {
-            publicPath: "http://localhost:3000/dist/"
+            publicPath: "https://todoweb/dist/"
         },
-        hot: true
+        hot: false,
+        liveReload: false
     },
     plugins: [new ReactRefreshWebpackPlugin(), new ESLintPlugin()]
 };

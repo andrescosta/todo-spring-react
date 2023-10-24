@@ -1,24 +1,23 @@
 package todo;
 
+import java.time.Duration;
+import java.util.Map;
+
 import static io.gatling.javaapi.core.CoreDsl.RawFileBody;
 import static io.gatling.javaapi.core.CoreDsl.atOnceUsers;
 import static io.gatling.javaapi.core.CoreDsl.jmesPath;
 import static io.gatling.javaapi.core.CoreDsl.jsonPath;
 import static io.gatling.javaapi.core.CoreDsl.scenario;
-import static io.gatling.javaapi.http.HttpDsl.http;
-import static io.gatling.javaapi.http.HttpDsl.status;
-
-import java.time.Duration;
-import java.util.Map;
-
 import io.gatling.javaapi.core.ScenarioBuilder;
 import io.gatling.javaapi.core.Simulation;
+import static io.gatling.javaapi.http.HttpDsl.http;
+import static io.gatling.javaapi.http.HttpDsl.status;
 import io.gatling.javaapi.http.HttpProtocolBuilder;
 
 public class RecordedSimulation extends Simulation {
 
   private HttpProtocolBuilder httpProtocol = http
-    .baseUrl("http://localhost:8080")
+    .baseUrl("https://todosvc")
     .disableFollowRedirect()
     .disableAutoReferer()
     .acceptHeader("*/*")
@@ -36,12 +35,12 @@ public class RecordedSimulation extends Simulation {
     Map.entry("authorization", "Bearer ${access_token}")
   );
   
-  private String uri1 = "localhost";
+  //private String uri1 = "localhost";
 
   private ScenarioBuilder scn = scenario("RecordedSimulation")
     .exec(
       http("request_0")
-        .post("http://" + uri1 + ":8282/realms/my-todo-app/protocol/openid-connect/token")
+        .post("https://keycloak/realms/my-todo-app/protocol/openid-connect/token")
         .headers(headers_0)
         .formParam("grant_type", "password")
         .formParam("username", "test")

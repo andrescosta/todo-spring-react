@@ -66,8 +66,7 @@ public class MediaRepository {
         if (keys == null || keys.isEmpty()) {
             throw new Error();
         }
-        return new Media((long) keys.get("id"), (UUID) keys.get("public_id"), media.name(), media.description(),
-                media.type(), media.uri(), null, media.extraData());
+        return media.withIDs((long) keys.get("id"), (UUID) keys.get("public_id"));
     }
 
     public List<Media> getMediaByActivity(long id) {

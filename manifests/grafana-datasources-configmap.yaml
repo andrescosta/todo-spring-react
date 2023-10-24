@@ -1,0 +1,25 @@
+apiVersion: v1
+data:
+  datasource.yaml: "apiVersion: 1\r\n\r\ndatasources:\r\n    - name: Prometheus\r\n
+    \     type: prometheus\r\n      access: proxy\r\n      url: http://prometheus:9090\r\n
+    \     editable: false\r\n      jsonData:\r\n        httpMethod: POST\r\n        exemplarTraceIdDestinations:\r\n
+    \         - name: trace_id\r\n            datasourceUid: tempo\r\n    - name:
+    Tempo\r\n      type: tempo\r\n      access: proxy\r\n      orgId: 1\r\n      url:
+    http://tempo:3200\r\n      basicAuth: false\r\n      isDefault: true\r\n      version:
+    1\r\n      editable: false\r\n      apiVersion: 1\r\n      uid: tempo\r\n      jsonData:\r\n
+    \         httpMethod: GET\r\n          tracesToLogs:\r\n              datasourceUid:
+    'loki'\r\n    - name: Loki\r\n      type: loki\r\n      uid: loki\r\n      access:
+    proxy\r\n      orgId: 1\r\n      url: http://loki:3100\r\n      basicAuth: false\r\n
+    \     isDefault: false\r\n      version: 1\r\n      editable: false\r\n      apiVersion:
+    1\r\n      jsonData:\r\n          derivedFields:\r\n              -   datasourceUid:
+    tempo\r\n                  matcherRegex: ^.*?\\b\\w+,\\s*([^,]+)\r\n                  name:
+    TraceID\r\n                  url: $${__value.raw}\r\n    - name: Pyroscope\r\n
+    \     type: pyroscope-datasource\r\n      access: proxy\r\n      uid: pyroscope\r\n
+    \     jsonData:\r\n          path: http://pyroscope:4040"
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2023-10-11T15:24:11Z"
+  name: grafana-datasources
+  namespace: default
+  resourceVersion: "17145"
+  uid: 3efdd479-dd1f-4a28-892f-35bbabeeaeed

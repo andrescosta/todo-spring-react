@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\Users\Andres\AppData\Local\Microsoft\WinGet\Links\kompose.exe convert -f ..\compose.yml
+    kompose.version: 1.30.0 (9d8dcb518)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: todosvc
+  name: todosvc
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: todosvc
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\Users\Andres\AppData\Local\Microsoft\WinGet\Links\kompose.exe convert -f ..\compose.yml
+        kompose.version: 1.30.0 (9d8dcb518)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/app: "true"
+        io.kompose.service: todosvc
+    spec:
+      containers:
+        - env:
+            - name: PYROSCOPE_APPLICATION_NAME
+              value: todo-svc-docker
+            - name: PYROSCOPE_FORMAT
+              value: jfr
+            - name: PYROSCOPE_LOG_LEVEL
+              value: error
+            - name: PYROSCOPE_PROFILER_ALLOC
+              value: 100k
+            - name: PYROSCOPE_PROFILER_EVENT
+              value: itimer
+            - name: PYROSCOPE_PROFILER_LOCK
+              value: "1"
+            - name: PYROSCOPE_PROFILING_INTERVAL
+              value: 10ms
+            - name: PYROSCOPE_SERVER_ADDRESS
+              value: http://pyroscope:4040
+            - name: PYROSCOPE_UPLOAD_INTERVAL
+              value: 10s
+            - name: SPRING_PROFILES_ACTIVE
+              value: devdocker
+          image: coeux/todo:latest
+          #livenessProbe:
+          #  exec:
+          #    command:
+          #      - curl -f http://localhost:8080/activities || exit 1
+          #  failureThreshold: 2
+          #  periodSeconds: 60
+          #  timeoutSeconds: 10
+          name: todosvc
+          ports:
+            - containerPort: 8080
+              hostPort: 8080
+              protocol: TCP
+          resources: {}
+      restartPolicy: Always
+status: {}

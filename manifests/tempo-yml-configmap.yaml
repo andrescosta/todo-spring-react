@@ -1,0 +1,12 @@
+apiVersion: v1
+data:
+  tempo-local.yaml: "server:\r\n  http_listen_port: 3200\r\n\r\ndistributor:\r\n  receivers:\r\n
+    \   zipkin:\r\n\r\nstorage:\r\n  trace:\r\n    backend: local\r\n    local:\r\n
+    \     path: /tmp/tempo/blocks"
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2023-10-11T16:54:24Z"
+  name: tempo-yml
+  namespace: default
+  resourceVersion: "25275"
+  uid: c2edab18-c58f-4f59-b1b5-7b0e6aef9b2d

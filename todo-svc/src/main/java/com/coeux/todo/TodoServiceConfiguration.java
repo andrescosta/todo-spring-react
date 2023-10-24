@@ -14,6 +14,8 @@ class TodoServiceConfiguration {
 
     @Value("${http.allowedOrigins}")
     String[] allowedOrigins;
+    @Value("${http.allowedMethods}")
+    String[] allowedMethods;
 
     @Bean
     ObservedAspect observedAspect(ObservationRegistry observationRegistry) {
@@ -22,13 +24,14 @@ class TodoServiceConfiguration {
 
     @Bean
     WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins(allowedOrigins);
-			}
-		};
-	}
-
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                .allowedOrigins(allowedOrigins)
+                .allowedMethods(allowedMethods);
+            }
+        };
+    }
 
 }

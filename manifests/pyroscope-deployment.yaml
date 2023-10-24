@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f compose.yml
+    kompose.version: 1.30.0 (9d8dcb518)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: pyroscope
+  name: pyroscope
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: pyroscope
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f compose.yml
+        kompose.version: 1.30.0 (9d8dcb518)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/app: "true"
+        io.kompose.service: pyroscope
+    spec:
+      containers:
+        - args:
+            - server
+          env:
+            - name: PYROSCOPE_LOG_LEVEL
+              value: error
+          image: pyroscope/pyroscope:latest
+          name: pyroscope
+          ports:
+            - containerPort: 4040
+              hostPort: 4040
+              protocol: TCP
+          resources: {}
+      restartPolicy: Always
+status: {}

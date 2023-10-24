@@ -142,3 +142,5 @@ func (a *ActivityRepository) commit(ctx context.Context, tx pgx.Tx) error {
 	}
 	return nil
 }
+
+package main
