@@ -2,6 +2,8 @@
 
 ## Java
 ### Spring boot
+https://www.danvega.dev/blog/spring-jdbc-client
+
 #### Future improvements
 * Kafka and WebSockets
 * Nginx
