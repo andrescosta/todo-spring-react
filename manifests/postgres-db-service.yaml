@@ -13,7 +13,7 @@ spec:
   ports:
     - name: "5432"
       port: 5432
-      targetPort: 5432
+  clusterIP: None
   selector:
     io.kompose.service: postgres-db
 status:
