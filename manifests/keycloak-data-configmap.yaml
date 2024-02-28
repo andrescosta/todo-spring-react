@@ -278,7 +278,7 @@ data:
     false,\r\n      \"publicClient\": true,\r\n      \"frontchannelLogout\": true,\r\n
     \     \"protocol\": \"openid-connect\",\r\n      \"attributes\": {\r\n        \"oidc.ciba.grant.enabled\":
     \"false\",\r\n        \"backchannel.logout.session.required\": \"true\",\r\n        \"post.logout.redirect.uris\":
-    \"https://todoweb/##https://todoweb/#\",\r\n        \"display.on.consent.screen\":
+    \"https://todoweb/*##https://todoweb/#\",\r\n        \"display.on.consent.screen\":
     \"false\",\r\n        \"oauth2.device.authorization.grant.enabled\": \"false\",\r\n
     \       \"backchannel.logout.revoke.offline.tokens\": \"false\"\r\n      },\r\n
     \     \"authenticationFlowBindingOverrides\": {},\r\n      \"fullScopeAllowed\":

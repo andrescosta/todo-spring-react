@@ -31,7 +31,7 @@ spec:
             - start-dev
             - --import-realm
             - --metrics-enabled=true
-            - --http-port 8282
+            - --http-port=8282
           env:
             - name: KC_DB
               value: postgres

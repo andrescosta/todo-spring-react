@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: todoweb
 spec:
+  ingressClassName: nginx
   tls:
     - hosts:
         - todoweb
