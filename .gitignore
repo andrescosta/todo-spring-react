@@ -8,7 +8,7 @@ HELP.md
 **\node_modules
 **\dist
 tempo-data
-
+*.bkp
 ### STS ###
 .apt_generated
 .classpath

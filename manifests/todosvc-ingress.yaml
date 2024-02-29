@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: todosvc
 spec:
+  ingressClassName: nginx
   tls:
     - hosts:
         - todosvc

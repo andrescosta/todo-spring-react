@@ -1,7 +1,7 @@
 # Project: TODO App
 
 ## High level architecture
-![Alt](docs/arch.drawio.png)
+![Alt](docs/arch-k8s.svg)
 
 ## Data Model
 ```mermaid
@@ -118,35 +118,43 @@ erDiagram
 * Webpack
 * Axios
 
-## Local Test
+## Deployment
+
+### Requirements
+
+- Kubernetes
+- Skaffold
+
+### Steps
 
 * Building 
-```
-docker compose build
+``` bash
+cd manifests
+skaffold build
 ```
 
 * Starting the enviroment 
-
-```
-docker compose up -d
+```  bash
+cd manifests
+skaffold run
 ```
 
 * Runing integration tests
 
-```
+```  bash
 cd test
 .\mvnw surefire:test
 ```
 
 * Runing performance tests
 
-```
+```  bash
 cd .\performance\gatling\
 .\mvnw gatling:test 
 ```
 
 * Generating the API Documentation
-```
+```  bash
 cd .\todo-svc
 .\mvnw package
 ```
